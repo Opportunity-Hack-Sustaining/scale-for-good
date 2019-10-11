@@ -6,6 +6,7 @@
 2) [Merging](#2---merging)
 3) [Committing](#3---committing)
 4) [Conflicts](#4---conflicts)
+5) [Tips](#5---tips)
 
 ### 1 - Branching
 
@@ -14,3 +15,5 @@
 ### 3 - Committing
 
 ### 4 - Conflicts
+
+### 5 - Tips
