@@ -1,6 +1,6 @@
 # Scale for Good
 
-###### A PayPal & ASU capstone project
+##### A PayPal & ASU capstone project
 
 ## Index
 
