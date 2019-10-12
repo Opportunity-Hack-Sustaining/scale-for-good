@@ -26,8 +26,8 @@ This project involves both hardware and software components.
 Hardware:
 * Raspberry Pi microcontroller
 * Wireless access point device [*undefined*]
-* Load censors
-* Encasement components [*undefined*]
+* Load sensors
+* Encasing components [*undefined*]
 
 Software:
 * Python
