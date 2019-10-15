@@ -43,7 +43,7 @@ This project will also use the open-source project [Pantry for Good](https://git
 ## 6 - Documentation
 
 The user guide for the scale and app can be found [here]().
-The GitHub workflow guide can be found [here](/gitWorkflow.md).
+The GitHub workflow guide can be found [here](/GitWorkflow.md).
 
 ## 7 - Credits
 This project was developed by a group of ASU students alongside PayPal for their senior capstone project.
