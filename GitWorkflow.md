@@ -7,7 +7,6 @@
 3) [Merging](#3---merging)
 4) [Committing](#4---committing)
 5) [Conflicts](#5---conflicts)
-6) [Tips](#6---tips)
 
 ### 1 - Master and Dev
 The two primary branches in this project are *master* and *dev*. These branches serve as the accumulation of all additions made in this project.
@@ -64,8 +63,13 @@ Merging between development branches can be done, but should ideally be reserved
 ### 4 - Committing
 All commits that are not merging pull requests should be strictly done on development branches (i.e. never commit directly to dev or master). Furthermore, every commit should contain a commit message, as well as a *commit token*.
 
+The convention in which commit messages are formatted is as follows:
+```python
+commitMessage = commitToken + ": " + actualCommitMessage
+```
+
 #### Commit tokens
-**Commit tokens* are used to communicate the purpose of each commit. This will help developers write their commit messages much quicker as well as allow reviewers to understand the commit history for branches better.
+**Commit tokens** are used to communicate the purpose of each commit. This will help developers write their commit messages much quicker as well as allow reviewers to understand the commit history for branches better.
 The table below lists the commit tokens that we will currently be using for our commit messages.
 
 | Token     | Name                | Purpose                                                                                                                                   |
@@ -78,4 +82,5 @@ The table below lists the commit tokens that we will currently be using for our 
 
 ### 5 - Conflicts
 
-### 6 - Tips
+The intention behind making all merges fast forwards is to avoid merge conflicts. However, it is likely that at some point when attempting to merge onto dev a merge conflict will occur.
+In this scenario, it is the responsibility of the developer making the pull request to solve the merge conflict. If the merge conflict is occuring due to an addition of a particular branch, it may be helpful to have the developer of that branch review the pull request, to ensure that the branch's functionality is not tampered with.
