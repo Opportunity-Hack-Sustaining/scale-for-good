@@ -36,7 +36,7 @@ git checkout -b "doc/s1/ReadmeAndWorkflow"
 **Task tokens** provide means to categorize tasks into the various layers we will be working with in the project. 
 The following table provides the current list of tokens we will be using.
 
-| Token     | Task Name       | Purpose                                                                                                  |
+| Token     | Name               | Purpose                                                                                                  |
 | --------: | :--------------:  | -----------------------------------------------------------------------------  |
 | abe        | App back end     | Any code relating to the back end development of the mobile application. |
 | afe         | App front end    | Any code relating to the front end development of the mobile application. |
@@ -53,11 +53,28 @@ The **branch title** is whatever name the branch creator decides to give to the 
 
 The intent behind this naming convention is to create a wildcard listing convention for all branches. 
 By using the task token or sprint number, one could filter through the various branches to find the branches pertaining to that specific grouping.
-For example, using `git branch --list "doc/*"` would list all branches categorized as documentation. Additionally, using `git branch --list "*/s1/*" would list all branches that we developed during sprint 1.
+For example, using `git branch --list "doc/*"` would list all branches categorized as documentation. Additionally, using `git branch --list "*/s1/*"` would list all branches that we developed during sprint 1.
 
 ### 3 - Merging
+All development done in this project will be done by branching off from dev and remerging back into it. Any merge done onto the dev or master branch must be done through a pull request.
+Pull requests must be reviewed by another team member and must have not merge conflicts to be approved. Additionally, any pull requests that do not pass semantic checks will not be approved (for more see [code conventions]()).
+
+Merging between development branches can be done, but should ideally be reserved when one is the author of both branches being merged or both authors mutually agree that it is necessary.
 
 ### 4 - Committing
+All commits that are not merging pull requests should be strictly done on development branches (i.e. never commit directly to dev or master). Furthermore, every commit should contain a commit message, as well as a *commit token*.
+
+#### Commit tokens
+**Commit tokens* are used to communicate the purpose of each commit. This will help developers write their commit messages much quicker as well as allow reviewers to understand the commit history for branches better.
+The table below lists the commit tokens that we will currently be using for our commit messages.
+
+| Token     | Name                | Purpose                                                                                                                                   |
+| --------: | :---------------: | -----------------------------------------------------------------------------------------------------  |
+| I             | Initial                 | Indicates the first commit for a branch.                                                                                      |
+| U            | Update              | Indicates that this commit updates the current branch. Used for most commits.                         |
+| M           | Merge                | indicates that this commit is for a merge. Usually done for fast forwards.                                    |
+| R            | Ready               | Indicates that this commit is ready for dev.                                                                                |
+| UR          | Update + ready | Indicates that this commit is updating the branch and is ready (only done after an *R* commit.) |
 
 ### 5 - Conflicts
 
