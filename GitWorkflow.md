@@ -14,7 +14,7 @@ The two primary branches in this project are *master* and *dev*. These branches 
 #### Master
 The **master** branch will contain the most recent, deliverable version of our project and will generally be updated at the end of every sprint.
     * It is vital that master branch always remains functional throughout the entire project and is only updated via fast forwards with the dev branch.
-    * The Git Master (see [roles](/Roles.md)) is the only individual who should approve pull requests to the master branch.
+    * The Git Master is the only individual who should approve pull requests to the master branch.
 
 #### Dev
 The **dev** branch will contain the most recent changes made to our project and will be used to sort out any discrepencies between other branches. 
@@ -56,7 +56,7 @@ For example, using `git branch --list "doc/*"` would list all branches categoriz
 
 ### 3 - Merging
 All development done in this project will be done by branching off from dev and remerging back into it. Any merge done onto the dev or master branch must be done through a pull request.
-Pull requests must be reviewed by another team member and must have not merge conflicts to be approved. Additionally, any pull requests that do not pass semantic checks will not be approved (for more see [code conventions]()).
+Pull requests must be reviewed by another team member and must have not merge conflicts to be approved. Additionally, any pull requests that do not pass semantic checks will not be approved (for more see the [Process Definitions guide](https://docs.google.com/document/d/1NESWm63OmFAcAY1dW_YJ7AVUofGFQQ8WwYitfEBta64/edit?usp=sharing)).
 
 Merging between development branches can be done, but should ideally be reserved when one is the author of both branches being merged or both authors mutually agree that it is necessary.
 
