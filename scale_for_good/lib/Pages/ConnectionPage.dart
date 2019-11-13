@@ -9,6 +9,7 @@ class _SettingsPageState extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+
           Expanded(
             /*1*/
             child: Column(
@@ -89,14 +90,23 @@ class _SettingsPageState extends StatelessWidget {
     );
 
     return MaterialApp(
-      title: 'Flutter layout demo',
+      title: 'Settings',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Flutter layout demo'),
+          title: Text('Settings'),
         ),
         body: ListView(
           padding: const EdgeInsets.only(top:30),
           children: [
+            RaisedButton(
+              child: Text('Home Page'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => _SettingsPageState()),
+                );
+              },
+            ),
             knownDevicesTitle,
             knownDevices,
             knownDevices,
