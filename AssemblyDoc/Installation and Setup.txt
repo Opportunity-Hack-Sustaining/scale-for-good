@@ -1,0 +1,15 @@
+First you will want to ensure you have raspbian on your memory card.
+
+Specifically follow the instructions for NOOBS installation here:
+https://www.raspberrypi.org/documentation/installation/noobs.md
+
+Once raspbian is installed open the terminal and run these commands:
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install python-dev python-pip
+sudo pip install --upgrade distribute
+sudo pip install ipython
+sudo pip install --upgrade RPi.GPIO
+
+Your RPi is now ready for python development.
