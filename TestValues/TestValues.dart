@@ -1,6 +1,7 @@
 import 'dart:math';
 
 List<double> goodValues = [];
+List<double> badValues = [];
 
 double getRNGNum(){
   var rng = new Random();
@@ -10,17 +11,26 @@ double getRNGNum(){
   return completeVal;
 }
 
-void putNum(double d){
+void putGoodNum(double d){
   goodValues.add(d);
   goodValues.sort((a, b) => a.compareTo(b));
 }
+void putBadNum(double d){
+  print(d);
+  badValues.add(d);
+  badValues.sort((a, b) => a.compareTo(b));
+}
 
-
-//This is the main call used when getting good values
-//Example: goodValueList = getGoodList(50);
 List<double> getGoodList(int size){
   for (var i =0;i<size;i++){
-    putNum(getRNGNum());
+    putGoodNum(getRNGNum());
   }
   return goodValues;
+}
+
+List<double> getBadList(int size){
+  for (var i =0;i<size;i++){
+    putBadNum(getRNGNum()*-1);
+  }
+  return badValues;
 }
