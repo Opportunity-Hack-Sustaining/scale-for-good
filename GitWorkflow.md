@@ -13,13 +13,13 @@ The two primary branches in this project are *master* and *dev*. These branches 
 
 #### Master
 The **master** branch will contain the most recent, deliverable version of our project and will generally be updated at the end of every sprint.
-    * It is vital that master branch always remains functional throughout the entire project and is only updated via fast forwards with the dev branch.
-    * The Git Master is the only individual who should approve pull requests to the master branch.
+It is vital that master branch always remains functional throughout the entire project and is only updated via fast forwards with the dev branch.
+The Git Master is the only individual who should approve pull requests to the master branch.
 
 #### Dev
 The **dev** branch will contain the most recent changes made to our project and will be used to sort out any discrepencies between other branches. 
-    * All other branches will branch off from dev, except for the master branch.
-    * The dev branch *should* remain functional, but is susceptible to errors as it will contain all development progress.
+All other branches will branch off from dev, except for the master branch.
+The dev branch *should* remain functional, but is susceptible to errors as it will contain all development progress.
 
 ### 2 - Branching
 Branches will have a particular naming convention to identify their task type and the sprint that they come from. The naming pattern can be interpreted as such:
@@ -45,6 +45,7 @@ The following table provides the current list of tokens we will be using.
 | mdb       | AWS Mongo DB | Any code relating to the Mongo database development on AWS.              |
 | rpi          | Raspberry Pi      | Any code relating to the Raspberry Pi.                                                      |
 | sht         | Shit                   | Any branch that is purely for trying shit out.                                             |
+| tst          | Test                  | Any code relating to test cases for any portion of the project.                  |
 
 #### Sprint number and branch title
 The **sprint number** evidently represents the sprint number that the branch is currently being developed on.
