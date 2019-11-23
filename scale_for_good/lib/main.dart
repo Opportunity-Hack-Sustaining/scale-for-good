@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Pages/HomePage.dart';
-import 'Pages/ConnectionPage.dart';
+import 'Pages/SettingsPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.lightBlue,
       ),
-      home: HomePage(title: 'Scale for Good'),
+      home: HomePage(title: 'Home'),
     );
   }
 }
