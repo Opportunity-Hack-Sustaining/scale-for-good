@@ -2,6 +2,7 @@ import argparse
 import json
 import  random
 import datetime
+import sys
 
 donatorsDict = {
     "Target" : "tyler@target.com",
@@ -70,12 +71,38 @@ def generateDonation():
     donations.append(donation)
 
 def genEdgeDonations():
-    donations.append({"thisIs" : "cool"})
+    donations.append({"thisIs" : "aTestEntry"})
+    donations.append({})
+    donations.append("StringInsteadOfJson")
+    donations.append(0)
+    donations.append(-1)
+    donations.append({
+        "name" : "",
+        "weight" : sys.float_info.max,
+        "date" : datetime.datetime(datetime.MAXYEAR, 12, 30, 23, 59, 59, 999999),
+        "description" : "",
+        "email" : ""
+    })
+    donations.append({
+        "name" : "",
+        "weight" : sys.float_info.min,
+        "date" : datetime.datetime(datetime.MINYEAR, 1, 1, 0, 0, 0, 0),
+        "description" : "",
+        "email" : ""
+    })
+    donations.append({
+        "name" : -1,
+        "weight" : -1,
+        "date" : -1,
+        "description" : -1,
+        "email" : -1,
+    })
 
 def writeDonations(path):
     jsonWrap = {}
     jsonWrap["donations"] = donations
     with open(path, "w") as file:
         json.dump(jsonWrap, file, indent=4, sort_keys=True, default=str)
-    print(jsonWrap)
+        print("Data written to " + path)
+
 main()
