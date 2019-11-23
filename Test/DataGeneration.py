@@ -73,6 +73,9 @@ def genEdgeDonations():
     donations.append({"thisIs" : "cool"})
 
 def writeDonations(path):
-    print(donations)
-
+    jsonWrap = {}
+    jsonWrap["donations"] = donations
+    with open(path, "w") as file:
+        json.dump(jsonWrap, file, indent=4, sort_keys=True, default=str)
+    print(jsonWrap)
 main()
