@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
             ),
             new ListTile(
                 title: new Text("History"),
-                trailing: new Icon(Icons.settings),
+                trailing: new Icon(Icons.history),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => HistoryPage(title: "History")));
