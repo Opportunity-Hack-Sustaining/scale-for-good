@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:scale_for_good/Pages/HistoryPage.dart';
+import './HomePage.dart';
 
-class _SettingsPageState extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
+  SettingsPage({Key key, this.title}) : super(key: key);
+  final String title;
+
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
 
@@ -9,7 +19,6 @@ class _SettingsPageState extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-
           Expanded(
             /*1*/
             child: Column(
@@ -95,18 +104,49 @@ class _SettingsPageState extends StatelessWidget {
         appBar: AppBar(
           title: Text('Settings'),
         ),
+
+        drawer: new Drawer(
+          child: new ListView(
+            children: <Widget>[
+
+              new ListTile(
+                  title: new Text("Home Page"),
+                  trailing: new Icon(Icons.home),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => HomePage(title: 'Home Page')));
+                  }
+              ),
+              new ListTile(
+                  title: new Text("Settings Page"),
+                  trailing: new Icon(Icons.settings),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => SettingsPage(title: "Settings")));
+                  }
+              ),
+              new ListTile(
+                  title: new Text("History"),
+                  trailing: new Icon(Icons.history),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => HistoryPage(title: "History")));
+                  }
+              ),
+              new Divider(),
+              new ListTile(
+                title: new Text("Close"),
+                trailing: new Icon(Icons.cancel),
+                onTap: () => Navigator.of(context).pop(),
+              )
+
+            ],
+          ),
+        ),
+
         body: ListView(
           padding: const EdgeInsets.only(top:30),
           children: [
-            RaisedButton(
-              child: Text('Home Page'),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => _SettingsPageState()),
-                );
-              },
-            ),
             knownDevicesTitle,
             knownDevices,
             knownDevices,

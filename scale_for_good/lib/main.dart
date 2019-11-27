@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Pages/HomePage.dart';
-import 'Pages/ConnectionPage.dart';
+import 'Pages/SettingsPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Scale for Good',
+      title: 'Home Page',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.lightBlue,
       ),
-      home: HomePage(title: 'Scale for Good'),
+      home: HomePage(title: 'Home'),
     );
   }
 }
