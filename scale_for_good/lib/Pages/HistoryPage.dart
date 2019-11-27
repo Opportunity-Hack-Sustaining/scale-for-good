@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HistoryPage extends StatefulWidget {
-  HistoryPage({Key key}) : super(key: key);
+  HistoryPage({Key key, this.title}) : super(key: key);
+  final String title;
 
   @override
   _HistoryPageState createState() => _HistoryPageState();
@@ -11,9 +12,11 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
         color: Colors.white,
         padding: EdgeInsets.all(10.0),
+
         child: Column(
           children: <Widget>[
             Table(
