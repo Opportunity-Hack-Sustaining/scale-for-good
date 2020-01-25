@@ -37,7 +37,15 @@ while True:
     try:
         # Prints the weight
         val = max(0, int(hx.get_weight(5)))
-        print(val)
+        valArray = []
+        if valArray.length != 20:
+        	valArray.append(val)
+        else:
+        	# takes off edges and averages the middle weights taken
+        	valArray = valArray[5:15]
+        	sentWeight = sum(valArray) / float(len(valArray)
+        	print("Sent Weight is: " + sentWeight)
+        print("Read weight: " + val)
 
         hx.power_down()
         hx.power_up()
