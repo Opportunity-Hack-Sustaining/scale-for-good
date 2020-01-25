@@ -45,6 +45,7 @@ while True:
         	valArray = valArray[5:15]
         	sentWeight = sum(valArray) / float(len(valArray)
         	print("Sent Weight is: " + sentWeight)
+        	valArray = []
         print("Read weight: " + val)
 
         hx.power_down()
