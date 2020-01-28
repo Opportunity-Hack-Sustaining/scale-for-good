@@ -1,0 +1,38 @@
+PODS:
+  - "!ProtoCompiler (3.8.0)":
+    - Protobuf (~> 3.0)
+  - Flutter (1.0.0)
+  - flutter_blue (0.0.1):
+    - "!ProtoCompiler"
+    - Flutter
+    - flutter_blue/Protos (= 0.0.1)
+  - flutter_blue/Protos (0.0.1):
+    - "!ProtoCompiler"
+    - Flutter
+    - Protobuf
+  - Protobuf (3.10.0)
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_blue (from `.symlinks/plugins/flutter_blue/ios`)
+
+SPEC REPOS:
+  trunk:
+    - "!ProtoCompiler"
+    - Protobuf
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  flutter_blue:
+    :path: ".symlinks/plugins/flutter_blue/ios"
+
+SPEC CHECKSUMS:
+  "!ProtoCompiler": 7fc49078ec544d0347264496f6cd09b8132536b5
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  flutter_blue: 9a0aad280715bddb84fa1a03281aa70a9d40bbf1
+  Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
+
+PODFILE CHECKSUM: 1da93ff2dd46444ca89ed480d674631b93a3181a
+
+COCOAPODS: 1.8.4
