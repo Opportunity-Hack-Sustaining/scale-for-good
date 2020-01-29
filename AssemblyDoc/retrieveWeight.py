@@ -33,22 +33,22 @@ hx.tare()
 
 print("Tare done! Add weight now...")
 
-readValues = true
+readValues = True
+valArray = []
 
 while readValues:
     try:
         # Prints the weight
         val = max(0, int(hx.get_weight(5)))
-        valArray = []
-        if valArray.length != 20:
+        if len(valArray) != 20:
         	valArray.append(val)
         else:
         	# takes off edges and averages the middle weights taken
         	valArray = valArray[5:15]
-        	sentWeight = sum(valArray) / float(len(valArray)
-        	print("Sent Weight is: " + sentWeight)
+        	sentWeight = sum(valArray) / float(len(valArray))
+        	print("Sent Weight is: ",sentWeight)
         	valArray = []
-        print("Read weight: " + val)
+        print("Read weight: ",val)
 
         hx.power_down()
         hx.power_up()
