@@ -12,7 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _weight = 0;
+  final List<bool> isSelected = [false,true];
+  double _weight = 0;
+  double _calculatedWeight = 0;
+  String _weightType = 'kg';
+  bool lbs = true;
+  bool kg = false;
   DateTime _dateTime = new DateTime.now();
   String _sentStatus = "";
   Random weightGenerator = Random();
@@ -23,7 +28,9 @@ class _HomePageState extends State<HomePage> {
 
   void _sendWeight() {
     setState(() {
-      _weight = weightGenerator.nextInt(50);
+      _weight = weightGenerator.nextDouble();
+      _calculatedWeight = _weight;
+      _isKilos(isSelected[1]);
       _dateTime = DateTime.now();
       _sentStatus = "Weight sent!";
       _donatorName = "";
@@ -35,7 +42,23 @@ class _HomePageState extends State<HomePage> {
   void _zeroWeight() {
     setState(() {
       _weight = 0;
+      _calculatedWeight = 0;
     });
+  }
+
+  bool _isKilos(bool kilo) {
+    if (kilo == false) {
+      setState(() {
+        _weightType = 'lbs';
+        _calculatedWeight = (_weight * 2.20462);
+      });
+    }
+    else {
+      setState(() {
+        _weightType = 'kg';
+        _calculatedWeight = _weight;
+      });
+    }
   }
 
   getDonation() {
@@ -109,8 +132,9 @@ class _HomePageState extends State<HomePage> {
               'Total Weight:',
               style: Theme.of(context).textTheme.display1,
             ),
+
             Text(
-              '$_weight' + ' kg',
+                (_calculatedWeight).toStringAsFixed(2) + '$_weightType',
               style: Theme.of(context).textTheme.display3,
             ),
             Text(
@@ -144,6 +168,63 @@ class _HomePageState extends State<HomePage> {
             Text(
               '$_sentStatus',
             ),
+            Container(
+              padding: const EdgeInsets.only(top: 180),
+            ),
+        ToggleButtons(
+          children: <Widget>[
+            Text("Lb"),
+            Text("Kg")
+          ],
+          onPressed: (int index) {
+
+            setState(() {
+              for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
+                if (buttonIndex == index) {
+                  isSelected[buttonIndex] = true;
+                  _isKilos(true);
+                } else {
+                  isSelected[buttonIndex] = false;
+                  _isKilos(false);
+                }
+              }
+            });
+          },
+          isSelected: isSelected,
+        ),
+        /*Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // [Tuesday] checkbox
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("lbs"),
+                Checkbox(
+                  value: lbs,
+                  onChanged: (bool value) {
+                    setState(() {
+                      lbs = value;
+                    });
+                  },
+                ),
+              ],
+            ),              // [Wednesday] checkbox
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("kg"),
+                Checkbox(
+                  value: kg,
+                  onChanged: (bool value) {
+                    setState(() {
+                      kg = value;
+                    });
+                  },
+                ),
+              ],
+            ),            ],
+        ),*/
           ],
         ),
       ),
