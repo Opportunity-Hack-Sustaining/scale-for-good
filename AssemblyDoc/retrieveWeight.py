@@ -33,7 +33,9 @@ hx.tare()
 
 print("Tare done! Add weight now...")
 
-while True:
+readValues = true;
+
+while readValues:
     try:
         # Prints the weight
         val = max(0, int(hx.get_weight(5)))
