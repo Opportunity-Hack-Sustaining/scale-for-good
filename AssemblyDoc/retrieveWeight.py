@@ -33,7 +33,7 @@ hx.tare()
 
 print("Tare done! Add weight now...")
 
-readValues = true;
+readValues = true
 
 while readValues:
     try:
