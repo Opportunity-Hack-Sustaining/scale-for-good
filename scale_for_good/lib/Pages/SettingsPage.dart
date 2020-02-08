@@ -11,6 +11,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final List<bool> isSelected = [false,true];
   @override
   Widget build(BuildContext context) {
 
@@ -80,7 +81,8 @@ class _SettingsPageState extends State<SettingsPage> {
     );
 
     Widget knownDevicesTitle = Container(
-      padding: const EdgeInsets.only(left:32),
+
+      padding: const EdgeInsets.only(left:32,top:32),
       child: Text(
         'Known Devices',
         style: TextStyle(
@@ -88,6 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ),
     );
+
     Widget discoveredDevicesTitle = Container(
       padding: const EdgeInsets.only(left:32,top:32),
       child: Text(
@@ -95,6 +98,70 @@ class _SettingsPageState extends State<SettingsPage> {
         style: TextStyle(
           fontSize: 24,
         ),
+      ),
+    );
+
+
+    //Begin main settings
+    Widget MainSettingsTitle = Container(
+
+      padding: const EdgeInsets.only(left:32),
+      child: Text(
+        'Main Settings',
+        style: TextStyle(
+          fontSize: 24,
+        ),
+      ),
+    );
+
+    Widget weightOption = ToggleButtons(
+      children: <Widget>[
+        Text("Lb"),
+        Text("Kg")
+      ],
+      onPressed: (int index) {
+        setState(() {
+          for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
+            if (buttonIndex == index) {
+              isSelected[buttonIndex] = true;
+            } else {
+              isSelected[buttonIndex] = false;
+            }
+          }
+        });
+      },
+      isSelected: isSelected,
+    );
+
+
+    Widget calcWeight = Container(
+      padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            /*1*/
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /*2*/
+                Container(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    'Calculate Weight:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          weightOption,
+          Text('   '),
+          /*3*/
+        ],
       ),
     );
 
@@ -147,12 +214,14 @@ class _SettingsPageState extends State<SettingsPage> {
         body: ListView(
           padding: const EdgeInsets.only(top:30),
           children: [
+            MainSettingsTitle,
+            calcWeight,
             knownDevicesTitle,
             knownDevices,
             knownDevices,
             discoveredDevicesTitle,
             discovDevices,
-            discovDevices,
+            discovDevices
           ],
         ),
       ),
