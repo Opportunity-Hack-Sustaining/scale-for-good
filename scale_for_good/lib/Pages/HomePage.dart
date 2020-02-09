@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:scale_for_good/Dataflow/Donation.dart';
+import 'package:scale_for_good/Dataflow/LocalStorage.dart';
 import 'package:scale_for_good/Pages/HistoryPage.dart';
 import 'dart:math';
 import './SettingsPage.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  final LocalStorage storage;
   final String title;
+
+  HomePage({Key key, this.title, @required this.storage}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -27,6 +31,9 @@ class _HomePageState extends State<HomePage> {
   var donation = new List(5);
 
   void _sendWeight() {
+    Donation entry = new Donation(_calculatedWeight, _donatorName,
+        _donationDesc, _donatorEmail);
+
     setState(() {
       _weight = weightGenerator.nextDouble();
       _calculatedWeight = _weight;
@@ -37,6 +44,8 @@ class _HomePageState extends State<HomePage> {
       _donationDesc = "";
       _donatorEmail = "";
     });
+
+    widget.storage.writeDonation(entry.getJson());
   }
 
   void _zeroWeight() {
