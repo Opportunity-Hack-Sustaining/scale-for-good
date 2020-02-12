@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:scale_for_good/Pages/HistoryPage.dart';
 import './HomePage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key, this.title}) : super(key: key);
@@ -11,7 +13,9 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  final List<bool> isSelected = [false,true];
+
+  //toggle for weight calc. First is lbs and second is kilos
+  List<bool> weightList = [false,true];
   @override
   Widget build(BuildContext context) {
 
@@ -119,18 +123,21 @@ class _SettingsPageState extends State<SettingsPage> {
         Text("Lb"),
         Text("Kg")
       ],
-      onPressed: (int index) {
+      onPressed: (int index) async {
+
         setState(() {
-          for (int buttonIndex = 0; buttonIndex < isSelected.length; buttonIndex++) {
+          for (int buttonIndex = 0; buttonIndex < weightList.length; buttonIndex++) {
             if (buttonIndex == index) {
-              isSelected[buttonIndex] = true;
+              weightList[buttonIndex] = true;
             } else {
-              isSelected[buttonIndex] = false;
+              weightList[buttonIndex] = false;
             }
           }
         });
+        await weightPreferencesHelper.setKiloToSF(weightList[1]);
       },
-      isSelected: isSelected,
+      isSelected: weightList,
+
     );
 
 
@@ -170,6 +177,17 @@ class _SettingsPageState extends State<SettingsPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
+          actions: <Widget>[
+            FutureBuilder<bool>(
+              // get the languageCode, saved in the preferences
+                future: weightPreferencesHelper.getKiloSF(),
+                initialData: true,
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  return snapshot.hasData
+                      ? weightList[1] = snapshot.data
+                      : Container();
+                }),
+          ],
         ),
 
         drawer: new Drawer(
@@ -212,6 +230,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
 
         body: ListView(
+
           padding: const EdgeInsets.only(top:30),
           children: [
             MainSettingsTitle,
@@ -247,5 +266,31 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
       ],
     );
+  }
+
+
+}
+
+class weightPreferencesHelper {
+
+  static final String _kLanguageCode = "kilos";
+
+  //This could be repurposed to save many things
+  static Future<bool> setKiloToSF(bool sett) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setBool(_kLanguageCode, sett);
+  }
+
+  static Future<bool> getKiloSF() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return bool
+    return prefs.getBool(_kLanguageCode) ?? true;
+
+  }
+
+  checkForBool() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool checkValue = prefs.containsKey('value');
+    return checkValue;
   }
 }

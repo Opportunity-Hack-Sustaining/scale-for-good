@@ -1,4 +1,4 @@
-name: scale_for_good
+name: bluetooth_low_energy
 description: A new Flutter application.
 
 # The following defines the version and build number for your application.
@@ -19,11 +19,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: "0.5.6"
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  flutter_blue: ^0.4.0
 
 dev_dependencies:
   flutter_test:
