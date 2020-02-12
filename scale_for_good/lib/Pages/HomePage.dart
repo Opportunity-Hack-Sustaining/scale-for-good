@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scale_for_good/Pages/HistoryPage.dart';
 import 'dart:math';
 import './SettingsPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -171,6 +172,8 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.only(top: 180),
             ),
+
+
         ToggleButtons(
           children: <Widget>[
             Text("Lb"),
@@ -192,39 +195,7 @@ class _HomePageState extends State<HomePage> {
           },
           isSelected: isSelected,
         ),
-        /*Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // [Tuesday] checkbox
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("lbs"),
-                Checkbox(
-                  value: lbs,
-                  onChanged: (bool value) {
-                    setState(() {
-                      lbs = value;
-                    });
-                  },
-                ),
-              ],
-            ),              // [Wednesday] checkbox
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("kg"),
-                Checkbox(
-                  value: kg,
-                  onChanged: (bool value) {
-                    setState(() {
-                      kg = value;
-                    });
-                  },
-                ),
-              ],
-            ),            ],
-        ),*/
+
           ],
         ),
       ),
