@@ -6,8 +6,21 @@ https://flutter.dev/docs/cookbook/persistence/reading-writing-files
 import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import './Donation.dart';
 
 class LocalStorage {
+
+  static List <Map<String, dynamic>> _donations;
+
+  void init() async {
+    if(_donations.isEmpty){
+
+    }
+    else{
+
+    }
+  }
+
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
     return directory.path;
@@ -30,9 +43,17 @@ class LocalStorage {
     }
   }
 
-  Future<File> writeDonation(String donation) async {
-    final file = await _localFile;
-    print(donation);
-    return file.writeAsString('$donation');
+  Future<bool> writeDonation(Donation donation) async {
+    try {
+
+      final file = await _localFile;
+      print(donation);
+      _donations.add()
+      file.writeAsString('$donation');
+      return true;
+    } catch (e){
+      print(e.toString());
+      return false;
+    }
   }
 }

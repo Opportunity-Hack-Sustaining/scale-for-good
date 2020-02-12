@@ -22,7 +22,7 @@ class Donation{
     email = dono["email"];
   }
 
-  String getJson(){
+  Map<String, dynamic> getMap(){
     Map<String, dynamic> jsonDono = {
       "date" : date.toString(),
       "weight" : weight,
@@ -30,6 +30,10 @@ class Donation{
       "description" : description,
       "email" : email
     };
-    return jsonEncode(jsonDono);
+    return jsonDono;
+  }
+
+  String getJson(){
+    return jsonEncode(getMap());
   }
 }

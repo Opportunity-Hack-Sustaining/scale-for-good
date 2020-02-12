@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       _donatorEmail = "";
     });
 
-    widget.storage.writeDonation(entry.getJson());
+    widget.storage.writeDonation(entry);
   }   
 
   void _zeroWeight() {
