@@ -10,7 +10,7 @@ import './Donation.dart';
 
 class LocalStorage {
 
-  static List <Map<String, dynamic>> _donations;
+  static List <Donation> _donations;
 
   void init() async {
     if(_donations.isEmpty){
@@ -45,11 +45,10 @@ class LocalStorage {
 
   Future<bool> writeDonation(Donation donation) async {
     try {
-
       final file = await _localFile;
-      print(donation);
-      _donations.add()
+      _donations.add(donation);
       file.writeAsString('$donation');
+      print(donation);
       return true;
     } catch (e){
       print(e.toString());
