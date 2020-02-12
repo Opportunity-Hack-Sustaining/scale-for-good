@@ -27,7 +27,7 @@ class ScanResultTile extends StatelessWidget {
 
   Widget _buildAdvRow(BuildContext context, String title, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 4.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -153,7 +153,7 @@ class CharacteristicTile extends StatelessWidget {
   final BluetoothCharacteristic characteristic;
   final List<DescriptorTile> descriptorTiles;
   final VoidCallback onReadPressed;
-  final VoidCallback onWritePressed;
+  //final VoidCallback onWritePressed;
   final VoidCallback onNotificationPressed;
 
   const CharacteristicTile(
@@ -161,7 +161,7 @@ class CharacteristicTile extends StatelessWidget {
         this.characteristic,
         this.descriptorTiles,
         this.onReadPressed,
-        this.onWritePressed,
+        //this.onWritePressed,
         this.onNotificationPressed})
       : super(key: key);
 
@@ -177,11 +177,11 @@ class CharacteristicTile extends StatelessWidget {
           ),
           onPressed: onReadPressed,
         ),
-        new IconButton(
-          icon: new Icon(Icons.file_upload,
-              color: Theme.of(context).iconTheme.color.withOpacity(0.5)),
-          onPressed: onWritePressed,
-        ),
+//        new IconButton(
+//          icon: new Icon(Icons.file_upload,
+//              color: Theme.of(context).iconTheme.color.withOpacity(0.5)),
+//          onPressed: onWritePressed,
+//        ),
         new IconButton(
           icon: new Icon(
               characteristic.isNotifying ? Icons.sync_disabled : Icons.sync,
@@ -195,7 +195,7 @@ class CharacteristicTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text('Characteristic'),
+        const Text('Characteristics'),
         new Text(
             '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
             style: Theme.of(context)

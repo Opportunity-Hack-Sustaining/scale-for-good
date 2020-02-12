@@ -147,21 +147,21 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
     setState(() {});
   }
 
-  _writeCharacteristic(BluetoothCharacteristic c) async {
-    await device.writeCharacteristic(c, [0x12, 0x34],
-        type: CharacteristicWriteType.withResponse);
-    setState(() {});
-  }
+//  _writeCharacteristic(BluetoothCharacteristic c) async {
+//    await device.writeCharacteristic(c, [0x12, 0x34],
+//        type: CharacteristicWriteType.withResponse);
+//    setState(() {});
+//  }
 
   _readDescriptor(BluetoothDescriptor d) async {
     await device.readDescriptor(d);
     setState(() {});
   }
 
-  _writeDescriptor(BluetoothDescriptor d) async {
-    await device.writeDescriptor(d, [0x12, 0x34]);
-    setState(() {});
-  }
+//  _writeDescriptor(BluetoothDescriptor d) async {
+//    await device.writeDescriptor(d, [0x12, 0x34]);
+//    setState(() {});
+//  }
 
   _setNotification(BluetoothCharacteristic c) async {
     if (c.isNotifying) {
@@ -226,15 +226,14 @@ class _FlutterBlueAppState extends State<FlutterBlueApp> {
               (c) => new CharacteristicTile(
             characteristic: c,
             onReadPressed: () => _readCharacteristic(c),
-            onWritePressed: () => _writeCharacteristic(c),
+            //onWritePressed: () => _writeCharacteristic(c),  //Commented out for writing to the pi
             onNotificationPressed: () => _setNotification(c),
             descriptorTiles: c.descriptors
                 .map(
                   (d) => new DescriptorTile(
                 descriptor: d,
                 onReadPressed: () => _readDescriptor(d),
-                onWritePressed: () =>
-                    _writeDescriptor(d),
+                //onWritePressed: () => _writeDescriptor(d),
               ),
             )
                 .toList(),
