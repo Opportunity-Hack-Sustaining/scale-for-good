@@ -1,35 +1,29 @@
-var bleno = require('../..');
+var bleno = require('bleno') ;
+var BlenoPrimaryService = bleno.PrimaryService;
 
-var Descriptor = bleno.Descriptor;
-var descriptor = new Descriptor({
-	uuid: '2901',
-	value: 'value'
+bleno.on('stateChange', function(state) {
+console.log('on -> stateChange: ' + state);
+    if (state === 'poweredOn') {
+        console.log("request startAdvertising");
+        bleno.startAdvertising('TestThisPi', ['27cf08c1-076a-41af-becd-02ed6f6109b9']);
+    } else {
+        console.log("request stopAdvertising");
+        bleno.stopAdvertising();
+    }
 });
 
-var Characteristic = bleno.Characteristic;
-var characteristic = new Characteristic({
-	uuid: 'fff1',
-	properties: [ 'read', 'write', 'writeWithoutResponse' ],
-	value: 'ff',
-	descriptors: [ descriptor ]
-});
-
-var PrimaryService = bleno.PrimaryService;
-var primaryService = new PrimaryService({
-	uuid: 'fffffffffffffffffffffffffffffff0',
-	characteristics: [ characteristic ]
-});
-
-var services = [ primaryService ];
-bleno.on('advertisingStart', function(err) {
-	bleno.setServices( services );
-});
-
-bleno.on( 'stateChange', function(state) {
-	console.log('BLE stateChanged to: ' + state);
-	if(state === 'poweredOn') {
-		bleno.startAdvertising('PiForDays', ['fffffffffffffffffffffffffffffff0']);
-	} else {
-		bleno.stopAdvertising();
-	}
+// characteristic
+var CustomCharacteristic = require('./characteristic');
+bleno.on('advertisingStart', function(error) {
+    console.log('on -> advertisingStart: ' + (error ? 'error ' + error : 'success'));
+     if (!error) {
+        bleno.setServices([
+            new BlenoPrimaryService({
+                uuid: '27cf08c1-076a-41af-becd-02ed6f6109b9',
+                characteristics: [
+                    new CustomCharacteristic()
+                ]
+            })
+        ]);
+    }
 });
