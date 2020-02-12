@@ -20,10 +20,16 @@ class Donation{
     donatedBy = dono["donatedBy"];
     description = dono["description"];
     email = dono["email"];
-    sent = dono["sent"];
   }
 
   String getJson(){
-    return jsonEncode(this);
+    Map<String, dynamic> jsonDono = {
+      "date" : date.toString(),
+      "weight" : weight,
+      "donatedBy" : donatedBy,
+      "description" : description,
+      "email" : email
+    };
+    return jsonEncode(jsonDono);
   }
 }

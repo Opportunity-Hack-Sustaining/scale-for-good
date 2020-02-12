@@ -32,7 +32,7 @@ class LocalStorage {
 
   Future<File> writeDonation(String donation) async {
     final file = await _localFile;
-    print("donation written");
+    print(donation);
     return file.writeAsString('$donation');
   }
 }

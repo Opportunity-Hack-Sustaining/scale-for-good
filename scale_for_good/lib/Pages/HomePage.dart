@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     });
 
     widget.storage.writeDonation(entry.getJson());
-  }
+  }   
 
   void _zeroWeight() {
     setState(() {
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  bool _isKilos(bool kilo) {
+  void _isKilos(bool kilo) {
     if (kilo == false) {
       setState(() {
         _weightType = 'lbs';
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                 trailing: new Icon(Icons.home),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(new MaterialPageRoute(builder: (context) => HomePage(title: 'Home Page')));
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (context) => HomePage(title: "Home Page", storage: widget.storage)));
                 }
             ),
             new ListTile(

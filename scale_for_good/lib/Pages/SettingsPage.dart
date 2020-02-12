@@ -3,8 +3,11 @@ import 'package:scale_for_good/Pages/HistoryPage.dart';
 import './HomePage.dart';
 
 class SettingsPage extends StatefulWidget {
-  SettingsPage({Key key, this.title}) : super(key: key);
+  //final LocalStorage storage;
   final String title;
+
+
+  SettingsPage({Key key, this.title}) : super(key: key);
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
