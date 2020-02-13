@@ -4,6 +4,7 @@ import time
 import sys
 import RPi.GPIO as GPIO
 from hx711 import HX711
+from scipy import stats
 
 referenceUnit = 1
 
@@ -39,13 +40,11 @@ valArray = []
 while readValues:
     try:
         # Prints the weight
-        val = max(0, int(hx.get_weight(5)))
-        if len(valArray) != 20:
+        val = max(0, int(hx.get_weight(1)))
+        if len(valArray) != 19:
         	valArray.append(val)
         else:
-        	# takes off edges and averages the middle weights taken
-        	valArray = valArray[5:15]
-        	sentWeight = sum(valArray) / float(len(valArray))
+        	sentWeight = stats.trim_mean(valArray, 0.1) # Trim 10% at both ends
         	print("Sent Weight is: ",sentWeight)
         	valArray = []
         print("Read weight: ",val)
