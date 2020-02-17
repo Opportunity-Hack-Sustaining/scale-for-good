@@ -17,7 +17,7 @@ module.exports = CustomCharacteristic;
 CustomCharacteristic.prototype.onReadRequest = function (offset, callback) {
     console.log('CustomCharacteristic onReadRequest');
     var data = new Buffer(1);
-    data.writeUInt8(14, 0);
+    data.writeUInt8(getWeight, 0);
     callback(this.RESULT_SUCCESS, data);
 };
 
@@ -27,3 +27,12 @@ CustomCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
     console.log('CustomCharacteristic - onWriteRequest: value = ' +       this._value.toString('hex'));
     callback(this.RESULT_SUCCESS);
 };
+
+//Call python to get weight
+var getWeight = function(){
+    const spawn = require('child_process').spawn;
+    const process = spawn('python', ['./retreiveWeight.py']);
+    process.stdout.on('data', function(data) {
+            return data.toInt();
+        } );
+}
