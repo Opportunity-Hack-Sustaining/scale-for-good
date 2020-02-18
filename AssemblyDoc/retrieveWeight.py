@@ -17,7 +17,7 @@ def cleanAndExit():
     print("Bye!")
     sys.exit()
 
-#Truncates longs to 2 decimal points
+#Truncates decimal numbers to given decimal points
 def truncate(n, decimals=0):
     multiplier = 10 ** decimals
     return int(n * multiplier) / multiplier
