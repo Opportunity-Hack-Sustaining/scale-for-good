@@ -10,9 +10,6 @@ from hx711 import HX711
 referenceUnit = 1
 weight = 0
 
-def getWeight():
-    return weight
-
 def cleanAndExit():
     print("Cleaning...")
 
