@@ -8,6 +8,10 @@ from hx711 import HX711
 
 
 referenceUnit = 1
+weight = 0
+
+def getWeight():
+    return weight
 
 def cleanAndExit():
     print("Cleaning...")
@@ -36,7 +40,7 @@ def calcWeights(weightsArray):
         weightsArray.remove(x)
 
     avgWeight = statistics.mean(weightsArray)
-    return avgWeight
+    return truncate(avgWeight,0)
 
 hx = HX711(5, 6)
 
@@ -66,10 +70,10 @@ while readValues:
         if len(valArray) != 19:
         	valArray.append(val)
         else:
-        	sentWeight = calcWeights(valArray)
-        	print("Sent Weight is: ",sentWeight)
+        	weight = calcWeights(valArray)
+        	print("Sent Weight is: ",weight)
         	valArray = []
-        print("Read weight: ",val)
+#        print("Read weight: ",val)
 
         hx.power_down()
         hx.power_up()
