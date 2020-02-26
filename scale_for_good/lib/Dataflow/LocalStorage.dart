@@ -65,4 +65,8 @@ class LocalStorage {
       return false;
     }
   }
+
+  List<Donation> getDonationsList() {
+    return _donations;
+  }
 }
