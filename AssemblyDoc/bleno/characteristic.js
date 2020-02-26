@@ -2,6 +2,8 @@ var util = require('util');
 var bleno = require('bleno');
 var BlenoCharacteristic = bleno.Characteristic;
 
+var weight = 0;
+
 var CustomCharacteristic = function() {
     CustomCharacteristic.super_.call(this, {
         uuid: 'fd758b93-0bfa-4c52-8af0-85845a74a606',
@@ -16,8 +18,9 @@ module.exports = CustomCharacteristic;
 // read
 CustomCharacteristic.prototype.onReadRequest = function (offset, callback) {
     console.log('CustomCharacteristic onReadRequest');
-    var data = new Buffer(1);
-    data.writeUInt8(getWeight, 0);
+    var data = new Buffer(4);
+    getWeight();
+    data.writeUInt32BE(weight);
     callback(this.RESULT_SUCCESS, data);
 };
 
@@ -29,10 +32,11 @@ CustomCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
 };
 
 //Call python to get weight
-var getWeight = function(){
+getWeight = function(){
     const spawn = require('child_process').spawn;
-    const process = spawn('python', ['./retreiveWeight.py']);
-    process.stdout.on('data', function(data) {
-            return data.toInt();
-        } );
+    const process = spawn('python', ["../getWeight.py"]);
+    process.stdout.on('data', function(data){
+	console.log("in getWeight function " + parseInt(data));
+	weight = parseInt(data, 10);
+    });
 }
