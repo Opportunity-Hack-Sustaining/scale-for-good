@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:scale_for_good/Pages/ConnectionsPage.dart';
 import 'package:scale_for_good/Pages/HistoryPage.dart';
+import 'package:scale_for_good/devices_list/devices_bloc_provider.dart';
+import 'package:scale_for_good/devices_list/devices_list_view.dart';
 import './HomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +21,17 @@ class _SettingsPageState extends State<SettingsPage> {
   List<bool> weightList = [false,true];
   @override
   Widget build(BuildContext context) {
+
+    Future<bool> temp = WeightPreferencesHelper.checkForBool();
+    if(temp == true) {
+      if(WeightPreferencesHelper.getKiloSF() as bool) {
+
+      }
+      else {
+        weightList[0] = true;
+        weightList[1] = false;
+      }
+    }
 
     Widget knownDevices = Container(
       padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:12),
@@ -134,7 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
             }
           }
         });
-        await weightPreferencesHelper.setKiloToSF(weightList[1]);
+        await WeightPreferencesHelper.setKiloToSF(weightList[1]);
       },
       isSelected: weightList,
 
@@ -177,17 +191,7 @@ class _SettingsPageState extends State<SettingsPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
-          actions: <Widget>[
-            FutureBuilder<bool>(
-              // get the languageCode, saved in the preferences
-                future: weightPreferencesHelper.getKiloSF(),
-                initialData: true,
-                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                  return snapshot.hasData
-                      ? weightList[1] = snapshot.data
-                      : Container();
-                }),
-          ],
+
         ),
 
         drawer: new Drawer(
@@ -208,6 +212,16 @@ class _SettingsPageState extends State<SettingsPage> {
                   onTap: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => SettingsPage(title: "Settings")));
+                  }
+              ),
+              new ListTile(
+                  title: new Text("Connections Page"),
+                  trailing: new Icon(Icons.settings),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                        new MaterialPageRoute(
+                            builder: (BuildContext context) => ConnectionsPage()));
                   }
               ),
               new ListTile(
@@ -271,7 +285,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
 }
 
-class weightPreferencesHelper {
+class WeightPreferencesHelper {
 
   static final String _kLanguageCode = "kilos";
 
@@ -288,9 +302,9 @@ class weightPreferencesHelper {
 
   }
 
-  checkForBool() async {
+  static Future<bool> checkForBool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool checkValue = prefs.containsKey('value');
+    bool checkValue = prefs.containsKey('kilos');
     return checkValue;
   }
 }
