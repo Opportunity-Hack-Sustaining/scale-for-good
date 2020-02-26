@@ -2,6 +2,7 @@ var util = require('util');
 var bleno = require('bleno');
 var BlenoCharacteristic = bleno.Characteristic;
 
+var fs = require('fs');
 var weight = 0;
 
 var CustomCharacteristic = function() {
@@ -33,10 +34,6 @@ CustomCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
 
 //Call python to get weight
 getWeight = function(){
-    const spawn = require('child_process').spawn;
-    const process = spawn('python', ["../getWeight.py"]);
-    process.stdout.on('data', function(data){
-	console.log("in getWeight function " + parseInt(data));
-	weight = parseInt(data, 10);
-    });
-}
+	weight = fs.readFileSync('../weightStore.txt', 'utf8');
+	console.log(weight);
+};

@@ -1,10 +1,7 @@
 import sys
-from readWeight import weight
 
-if (weight > 200000) {
-    weight = 200000
-}
+f = open("weightStore.txt", "r")
 
-print(weight)
+print(f.read())
 sys.stdout.flush()
 

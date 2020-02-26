@@ -68,9 +68,14 @@ while readValues:
         	valArray.append(val)
         else:
         	weight = calcWeights(valArray)
+		if weight > 200000:
+			weight = 200000
         	print("Sent Weight is: ",weight)
+		f = open("weightStore.txt", "w")
+		f.write(str(weight))
+		f.close
         	valArray = []
-#        print("Read weight: ",val)
+        print("Read weight: ",val)
 
         hx.power_down()
         hx.power_up()
