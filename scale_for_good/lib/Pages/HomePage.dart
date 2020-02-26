@@ -3,6 +3,7 @@ import 'package:scale_for_good/Pages/HistoryPage.dart';
 import 'dart:math';
 import './SettingsPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'ConnectionsPage.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -94,6 +95,7 @@ class _HomePageState extends State<HomePage> {
 
             new ListTile(
                 title: new Text("Home Page"),
+                enabled: false,
                 trailing: new Icon(Icons.home),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -101,11 +103,13 @@ class _HomePageState extends State<HomePage> {
                 }
             ),
             new ListTile(
-                title: new Text("Settings"),
+                title: new Text("Connections Page"),
                 trailing: new Icon(Icons.settings),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => SettingsPage(title: "Settings")));
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(
+                          builder: (BuildContext context) => ConnectionsPage()));
                 }
             ),
             new ListTile(

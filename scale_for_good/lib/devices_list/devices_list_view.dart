@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
+import 'package:scale_for_good/Pages/ConnectionsPage.dart';
+import 'package:scale_for_good/Pages/HistoryPage.dart';
+import 'package:scale_for_good/Pages/HomePage.dart';
 
 import 'package:scale_for_good/model/ble_device.dart';
 
@@ -69,6 +72,46 @@ class DeviceListScreenState extends State<DevicesListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Bluetooth devices'),
+      ),
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget>[
+
+            new ListTile(
+                title: new Text("Home Page"),
+                trailing: new Icon(Icons.home),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (context) => HomePage(title: 'Home Page')));
+                }
+            ),
+            new ListTile(
+                title: new Text("Connections Page"),
+                enabled: false,
+                trailing: new Icon(Icons.settings),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                      new MaterialPageRoute(
+                          builder: (BuildContext context) => ConnectionsPage()));
+                }
+            ),
+            new ListTile(
+                title: new Text("History"),
+                trailing: new Icon(Icons.history),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => HistoryPage(title: "History")));
+                }
+            ),
+            new Divider(),
+            new ListTile(
+              title: new Text("Close"),
+              trailing: new Icon(Icons.cancel),
+              onTap: () => Navigator.of(context).pop(),
+            )
+          ],
+        ),
       ),
       body: StreamBuilder<List<BleDevice>>(
         initialData: _devicesBloc.visibleDevices.value,
