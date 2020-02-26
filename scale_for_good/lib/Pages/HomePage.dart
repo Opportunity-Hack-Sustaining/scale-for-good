@@ -156,7 +156,9 @@ class _HomePageState extends State<HomePage> {
                 labelText: "Donator's name:",
               ),
               onChanged: (text){
-                _donatorName = text;
+                setState(() {
+                  _donatorName = text;
+                });
               },
             ),
             TextField(
@@ -164,7 +166,9 @@ class _HomePageState extends State<HomePage> {
                 labelText: "Donation description:",
               ),
               onChanged: (text){
-                _donationDesc = text;
+                setState(() {
+                  _donationDesc = text;
+                });
               },
             ),
             TextField(
@@ -172,7 +176,9 @@ class _HomePageState extends State<HomePage> {
                   labelText: "Donator's email:",
                 ),
                 onChanged: (text){
-                  _donatorEmail = text;
+                  setState(() {
+                    _donatorEmail = text;
+                  });
                 }
             ),
             Text(
