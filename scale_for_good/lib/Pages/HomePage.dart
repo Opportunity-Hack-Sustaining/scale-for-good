@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                 trailing: new Icon(Icons.history),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => HistoryPage(title: "History")));
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => HistoryPage(title: "History Page", storage: widget.storage)));
                 }
             ),
             new Divider(),
