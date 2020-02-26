@@ -28,11 +28,22 @@ class _HomePageState extends State<HomePage> {
   String _donatorName;
   String _donationDesc;
   String _donatorEmail;
-  var donation = new List(5);
+
+  @override
+  void initState() {
+    super.initState();
+    widget.storage.init();
+  }
 
   void _sendWeight() {
-    Donation entry = new Donation(_calculatedWeight, _donatorName,
-        _donationDesc, _donatorEmail);
+
+    widget.storage.writeDonation(new Donation(
+        date: _dateTime,
+        weight: _weight,
+        donatedBy: _donatorName,
+        description: _donationDesc,
+        email: _donatorEmail
+    ));
 
     setState(() {
       _weight = weightGenerator.nextDouble();
@@ -44,8 +55,6 @@ class _HomePageState extends State<HomePage> {
       _donationDesc = "";
       _donatorEmail = "";
     });
-
-    widget.storage.writeDonation(entry);
   }   
 
   void _zeroWeight() {
@@ -70,14 +79,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  getDonation() {
-    donation[0] = _weight;
-    donation[1] = _dateTime;
-    donation[2] = _donatorName;
-    donation[3] = _donationDesc;
-    donation[4] = _donatorEmail;
-    return donation;
-  }
   String mainProfilePicture = "https://randomuser.me/api/portraits/women/44.jpg";
   String otherProfilePicture = "https://randomuser.me/api/portraits/women/47.jpg";
 

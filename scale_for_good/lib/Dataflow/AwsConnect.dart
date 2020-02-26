@@ -9,7 +9,6 @@ class AwsConnect{
 
   bool sendDonation(Donation d){
     //Sends Donation d
-    d.sent = true;
     return true;
   }
 }
