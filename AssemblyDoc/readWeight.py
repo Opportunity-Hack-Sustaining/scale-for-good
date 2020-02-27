@@ -69,7 +69,7 @@ while readValues:
         else:
         	weight = calcWeights(valArray)
 		if weight > 200000:
-			weight = 200000
+		    weight = 200000
         	print("Sent Weight is: ",weight)
 		f = open("weightStore.txt", "w")
 		f.write(str(weight))
