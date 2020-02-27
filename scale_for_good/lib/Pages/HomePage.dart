@@ -52,9 +52,11 @@ class _HomePageState extends State<HomePage> {
       _isKilos(isSelected[1]);
       _dateTime = DateTime.now();
       _sentStatus = "Weight sent!";
+      /*
       _donatorName = "";
       _donationDesc = "";
       _donatorEmail = "";
+      */
     });
   }   
 

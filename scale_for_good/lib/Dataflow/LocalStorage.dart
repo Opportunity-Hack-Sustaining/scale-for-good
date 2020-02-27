@@ -57,8 +57,6 @@ class LocalStorage {
       _donations.add(donation);
       String donos = jsonEncode(_donations);
       file.writeAsString('$donos');
-      donos = await _readDonations();
-      print(donos);
       return true;
     } catch (e){
       print(e.toString());

@@ -80,8 +80,14 @@ class _HistoryPageState extends State<HistoryPage> {
                 rows: widget.storage.getDonationsList().map(
                     (dono) => DataRow(
                       cells: <DataCell>[
-                        DataCell(Text(dono.weight.toString())),
-                        DataCell(Text(dateFormat.format(dono.date))),
+                        DataCell(Container(
+                          width: 50,
+                          child: Text(dono.weight.toString())
+                        )),
+                        DataCell(Container(
+                          width: 50,
+                          child: Text(dateFormat.format(dono.date))
+                        )),
                         DataCell(Text(dono.donatedBy)),
                         DataCell(Text(dono.description))
                       ]
