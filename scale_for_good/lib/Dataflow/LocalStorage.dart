@@ -51,7 +51,6 @@ class LocalStorage {
   }
 
   Future<bool> writeDonation(Donation donation) async {
-    print(donation.donatedBy);
     try {
       final file = await _localFile;
       _donations.add(donation);
@@ -59,7 +58,6 @@ class LocalStorage {
       file.writeAsString('$donos');
       return true;
     } catch (e){
-      print(e.toString());
       return false;
     }
   }
