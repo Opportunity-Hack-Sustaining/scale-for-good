@@ -5,3 +5,4 @@
 .packages
 build/
 **/pubspec.lock
+bluetooth_low_energy/.flutter-plugins-dependencies

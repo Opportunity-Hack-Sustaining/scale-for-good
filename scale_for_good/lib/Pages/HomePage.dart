@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:scale_for_good/Dataflow/Donation.dart';
+import 'package:scale_for_good/Dataflow/LocalStorage.dart';
 import 'package:scale_for_good/Pages/HistoryPage.dart';
 import 'dart:math';
 import './SettingsPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  final LocalStorage storage;
   final String title;
+
+  HomePage({Key key, this.title, @required this.storage}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -24,9 +29,23 @@ class _HomePageState extends State<HomePage> {
   String _donatorName;
   String _donationDesc;
   String _donatorEmail;
-  var donation = new List(5);
+
+  @override
+  void initState() {
+    super.initState();
+    widget.storage.init();
+  }
 
   void _sendWeight() {
+
+    widget.storage.writeDonation(new Donation(
+        date: _dateTime,
+        weight: _weight,
+        donatedBy: _donatorName,
+        description: _donationDesc,
+        email: _donatorEmail
+    ));
+
     setState(() {
       _weight = weightGenerator.nextDouble();
       _calculatedWeight = _weight;
@@ -37,7 +56,7 @@ class _HomePageState extends State<HomePage> {
       _donationDesc = "";
       _donatorEmail = "";
     });
-  }
+  }   
 
   void _zeroWeight() {
     setState(() {
@@ -46,7 +65,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  bool _isKilos(bool kilo) {
+  void _isKilos(bool kilo) {
     if (kilo == false) {
       setState(() {
         _weightType = 'lbs';
@@ -61,14 +80,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  getDonation() {
-    donation[0] = _weight;
-    donation[1] = _dateTime;
-    donation[2] = _donatorName;
-    donation[3] = _donationDesc;
-    donation[4] = _donatorEmail;
-    return donation;
-  }
   String mainProfilePicture = "https://randomuser.me/api/portraits/women/44.jpg";
   String otherProfilePicture = "https://randomuser.me/api/portraits/women/47.jpg";
 
@@ -96,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 trailing: new Icon(Icons.home),
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(new MaterialPageRoute(builder: (context) => HomePage(title: 'Home Page')));
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (context) => HomePage(title: "Home Page", storage: widget.storage)));
                 }
             ),
             new ListTile(
@@ -146,7 +157,9 @@ class _HomePageState extends State<HomePage> {
                 labelText: "Donator's name:",
               ),
               onChanged: (text){
-                _donatorName = text;
+                setState(() {
+                  _donatorName = text;
+                });
               },
             ),
             TextField(
@@ -154,7 +167,9 @@ class _HomePageState extends State<HomePage> {
                 labelText: "Donation description:",
               ),
               onChanged: (text){
-                _donationDesc = text;
+                setState(() {
+                  _donationDesc = text;
+                });
               },
             ),
             TextField(
@@ -162,7 +177,9 @@ class _HomePageState extends State<HomePage> {
                   labelText: "Donator's email:",
                 ),
                 onChanged: (text){
-                  _donatorEmail = text;
+                  setState(() {
+                    _donatorEmail = text;
+                  });
                 }
             ),
             Text(
@@ -171,6 +188,8 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.only(top: 180),
             ),
+
+
         ToggleButtons(
           children: <Widget>[
             Text("Lb"),
@@ -192,39 +211,7 @@ class _HomePageState extends State<HomePage> {
           },
           isSelected: isSelected,
         ),
-        /*Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // [Tuesday] checkbox
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("lbs"),
-                Checkbox(
-                  value: lbs,
-                  onChanged: (bool value) {
-                    setState(() {
-                      lbs = value;
-                    });
-                  },
-                ),
-              ],
-            ),              // [Wednesday] checkbox
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("kg"),
-                Checkbox(
-                  value: kg,
-                  onChanged: (bool value) {
-                    setState(() {
-                      kg = value;
-                    });
-                  },
-                ),
-              ],
-            ),            ],
-        ),*/
+
           ],
         ),
       ),
