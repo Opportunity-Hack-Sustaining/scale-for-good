@@ -16,20 +16,22 @@ class LocalStorage {
   Future<void> init() async {
     if(_donations == null){
       _donations = new List<Donation>();
-      String entries = await _readDonations();
+      String entries = await _readFile();
       if (entries == "empty"){
-        final file = await _localFile;
-        file.writeAsString("[]");
+        _writeFile();
+        print(_readFile());
       }
       else {
         final parsed = jsonDecode(entries).cast<Map<String, dynamic>>();
-        _donations = parsed.map<Donation>((json) => Donation.fromJson(json)).toList();
+        _donations = parsed.map<Donation>((json) =>
+            Donation.fromJson(json)).toList();
       }
     }
   }
 
   Future<String> get _localPath async {
     final directory = await getApplicationDocumentsDirectory();
+    print (directory);
     return directory.path;
   }
 
@@ -38,7 +40,7 @@ class LocalStorage {
     return File('$path/donations.json');
   }
 
-  Future<String> _readDonations() async {
+  Future<String> _readFile() async {
     try {
       final file = await _localFile;
       String donations = await file.readAsString();
@@ -50,17 +52,26 @@ class LocalStorage {
     }
   }
 
-  Future<bool> writeDonation(Donation donation) async {
+  Future<bool> _writeFile() async {
     try {
       final file = await _localFile;
-      _donations.add(donation);
-      String donos = jsonEncode(_donations);
-      file.writeAsString('$donos');
+      file.writeAsString(jsonEncode(_donations));
       return true;
-    } catch (e){
+    } catch (e) {
       return false;
     }
   }
+
+  Future<bool> writeDonation(Donation donation) async {
+      _donations.add(donation);
+      bool writeSuccessful = await _writeFile();
+      if (!writeSuccessful){
+        _donations.removeLast();
+      }
+      return writeSuccessful;
+  }
+
+  Future<bool> deleteDonation(int index) async {}
 
   List<Donation> getDonationsList() {
     return _donations;
