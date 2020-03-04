@@ -134,8 +134,9 @@ class _SettingsPageState extends State<SettingsPage> {
               weightList[buttonIndex] = false;
             }
           }
+
         });
-        await weightPreferencesHelper.setKiloToSF(weightList[1]);
+        await WeightPreferencesHelper.setKiloToSF(weightList[1]);
       },
       isSelected: weightList,
 
@@ -181,7 +182,7 @@ class _SettingsPageState extends State<SettingsPage> {
           actions: <Widget>[
             FutureBuilder<bool>(
               // get the languageCode, saved in the preferences
-                future: weightPreferencesHelper.getKiloSF(),
+                future: WeightPreferencesHelper.getKiloSF(),
                 initialData: true,
                 builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
                   return snapshot.hasData
@@ -272,7 +273,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
 }
 
-class weightPreferencesHelper {
+class WeightPreferencesHelper {
 
   static final String _kLanguageCode = "kilos";
 

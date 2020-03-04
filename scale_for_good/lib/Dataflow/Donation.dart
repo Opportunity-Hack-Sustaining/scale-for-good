@@ -9,7 +9,7 @@ class Donation{
 
   factory Donation.fromJson(Map<String, dynamic> json) {
     return Donation(
-      date: json['date'] as DateTime,
+      date: DateTime.parse(json['date']),
       weight: json['weight'] as double,
       donatedBy: json['donatedBy'] as String,
       description: json['description'] as String,

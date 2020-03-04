@@ -49,14 +49,16 @@ class _HomePageState extends State<HomePage> {
     ));
 
     setState(() {
-        _weight = weightGenerator.nextDouble();
-        _calculatedWeight = _weight;
-        _isKilos(isSelected[1]);
-        _dateTime = DateTime.now();
-        _sentStatus = "Weight sent!";
-        _donatorName = "";
-        _donationDesc = "";
-        _donatorEmail = "";
+      _weight = weightGenerator.nextDouble();
+      _calculatedWeight = _weight;
+      _isKilos(isSelected[1]);
+      _dateTime = DateTime.now();
+      _sentStatus = "Weight sent!";
+      /*
+      _donatorName = "";
+      _donationDesc = "";
+      _donatorEmail = "";
+      */
     });
   }   
 
@@ -106,7 +108,7 @@ class _HomePageState extends State<HomePage> {
         child: new ListView(
           children: <Widget>[
             new ListTile(
-              title: new Text("Home Page"),
+              title: new Text("Home"),
                 trailing: new Icon(Icons.home),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -126,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(new MaterialPageRoute(builder:
                       (BuildContext context) => SettingsPage(
-                          title: "Settings"
+                          title: "Settings Page"
                       )
                   ));
                 }
@@ -139,7 +141,8 @@ class _HomePageState extends State<HomePage> {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(new MaterialPageRoute(builder:
                       (BuildContext context) => HistoryPage(
-                          title: "History"
+                          title: "History Page",
+                          storage: widget.storage
                       )
                   ));
                 }
