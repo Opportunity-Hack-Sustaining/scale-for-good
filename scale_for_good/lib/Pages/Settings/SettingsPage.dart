@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:scale_for_good/Pages/HistoryPage.dart';
-import './HomePage.dart';
+import 'package:scale_for_good/Pages/History/HistoryPage.dart';
+import 'package:scale_for_good/Pages/Home/HomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -110,7 +110,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
 
     //Begin main settings
-    Widget MainSettingsTitle = Container(
+    Widget mainSettingsTitle = Container(
       padding: const EdgeInsets.only(left:32),
       child: Text(
         'Main Settings',
@@ -197,20 +197,28 @@ class _SettingsPageState extends State<SettingsPage> {
             children: <Widget>[
 
               new ListTile(
-                  title: new Text("Home Page"),
+                  title: new Text("Home"),
                   trailing: new Icon(Icons.home),
                   onTap: () {
                     Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => HomePage(title: 'Home Page')));
+                    Navigator.of(context).push(new MaterialPageRoute(builder:
+                        (context) => HomePage(
+                          title: "Home Page",
+                        )
+                    ));
                   }
               ),
+
               new ListTile(
-                  title: new Text("Settings Page"),
+                  title: new Text("Settings"),
                   trailing: new Icon(Icons.settings),
                   onTap: () {
                     Navigator.of(context).pop();
                     Navigator.of(context).push(new MaterialPageRoute(builder:
-                        (BuildContext context) => SettingsPage(title: "Settings")));
+                        (BuildContext context) => SettingsPage(
+                          title: "Settings Page"
+                        )
+                    ));
                   }
               ),
               new ListTile(
@@ -218,7 +226,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   trailing: new Icon(Icons.history),
                   onTap: () {
                     Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => HistoryPage(title: "History")));
+                    Navigator.of(context).push(new MaterialPageRoute(builder:
+                        (BuildContext context) => HistoryPage(
+                          title: "History Page"
+                        )
+                    ));
                   }
               ),
               new Divider(),
@@ -236,7 +248,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
           padding: const EdgeInsets.only(top:30),
           children: [
-            MainSettingsTitle,
+            mainSettingsTitle,
             calcWeight,
             knownDevicesTitle,
             knownDevices,

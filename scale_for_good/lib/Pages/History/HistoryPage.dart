@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scale_for_good/Dataflow/LocalStorage.dart';
-import './SettingsPage.dart';
-import './HomePage.dart';
+import 'package:scale_for_good/Pages/Settings/SettingsPage.dart';
+import 'package:scale_for_good/Pages/Home/HomePage.dart';
 
 class HistoryPage extends StatefulWidget {
+
   final LocalStorage storage;
   final String title;
 
@@ -12,6 +13,7 @@ class HistoryPage extends StatefulWidget {
 
   @override
   _HistoryPageState createState() => _HistoryPageState();
+
 }
 
 class _HistoryPageState extends State<HistoryPage> {
@@ -20,26 +22,31 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text(widget.title),
+          title: Text(widget.title)
         ),
+
         drawer: new Drawer(
           child: new ListView(
             children: <Widget>[
               new ListTile(
-                title: new Text("Home Page"),
+                title: new Text("Home"),
                 trailing: new Icon(Icons.home),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(new MaterialPageRoute(builder:
-                      (context) => HomePage(title: "Home Page", storage: widget.storage)));
+                      (context) => HomePage(
+                        title: "Home Page",
+                        storage: widget.storage
+                      )
+                  ));
                 }
               ),
+
               new ListTile(
-                title: new Text("Settings Page"),
+                title: new Text("Settings"),
                 trailing: new Icon(Icons.settings),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -47,16 +54,23 @@ class _HistoryPageState extends State<HistoryPage> {
                       (context) => SettingsPage(title: "Settings Page")));
                 }
               ),
+
               new ListTile(
-                title: new Text("History Page"),
+                title: new Text("History"),
                 trailing: new Icon(Icons.history),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(new MaterialPageRoute(builder:
-                      (context) => HistoryPage(title: "History Page", storage: widget.storage)));
+                      (context) => HistoryPage(
+                        title: "History Page",
+                        storage: widget.storage
+                      )
+                  ));
                 }
               ),
+
               new Divider(),
+
               new ListTile(
                 title: new Text("Close"),
                 trailing: new Icon(Icons.cancel),
@@ -65,9 +79,11 @@ class _HistoryPageState extends State<HistoryPage> {
             ]
           )
         ),
+
         body: Container(
           color: Colors.white,
           padding: EdgeInsets.all(10.0),
+
           child: Column(
             children: <Widget>[
               DataTable(
@@ -77,6 +93,7 @@ class _HistoryPageState extends State<HistoryPage> {
                   DataColumn(label: Text("Donator")),
                   DataColumn(label: Text("Description"))
                 ],
+
                 rows: widget.storage.getDonationsList().map(
                     (dono) => DataRow(
                       cells: <DataCell>[
@@ -94,6 +111,7 @@ class _HistoryPageState extends State<HistoryPage> {
                     )
                 ).toList()
               ),
+
               ButtonBar(
                 alignment: MainAxisAlignment.end,
                 children: <Widget>[

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scale_for_good/Dataflow/Donation.dart';
 import 'package:scale_for_good/Dataflow/LocalStorage.dart';
-import 'package:scale_for_good/Pages/HistoryPage.dart';
+import 'package:scale_for_good/Pages/History/HistoryPage.dart';
 import 'dart:math';
-import './SettingsPage.dart';
+import 'package:scale_for_good/Pages/Settings/SettingsPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {

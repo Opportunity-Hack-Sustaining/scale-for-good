@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Pages/HomePage.dart';
+import 'package:scale_for_good/Pages/Home/HomePage.dart';
 import 'Dataflow/LocalStorage.dart';
 
 void main() => runApp(MyApp());
