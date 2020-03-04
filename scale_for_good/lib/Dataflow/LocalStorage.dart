@@ -63,15 +63,23 @@ class LocalStorage {
   }
 
   Future<bool> writeDonation(Donation donation) async {
-      _donations.add(donation);
-      bool writeSuccessful = await _writeFile();
-      if (!writeSuccessful){
-        _donations.removeLast();
-      }
-      return writeSuccessful;
+    _donations.add(donation);
+    bool writeSuccessful = await _writeFile();
+    if (!writeSuccessful){
+      _donations.removeLast();
+    }
+    return writeSuccessful;
   }
 
-  Future<bool> deleteDonation(int index) async {}
+  Future<bool> deleteDonation(int index) async {
+    Donation dono = _donations[index];
+    _donations.removeAt(index);
+    bool writeSuccessful = await _writeFile();
+    if (!writeSuccessful) {
+      _donations.insert(index, dono);
+    }
+    return writeSuccessful;
+  }
 
   List<Donation> getDonationsList() {
     return _donations;
