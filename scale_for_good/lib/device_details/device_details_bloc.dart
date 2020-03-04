@@ -137,29 +137,7 @@ class DeviceDetailsBloc {
     });
   }
 
-  void writeCharacteristicForPeripheral() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .writeCharacteristicForPeripheral();
-    });
-  }
 
-  void writeCharacteristicForService() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .writeCharacteristicForService();
-    });
-  }
-
-  void writeCharacteristicDirectly() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .writeCharacteristic();
-    });
-  }
 
   void monitorCharacteristicForPeripheral() {
     _clearLogs();
