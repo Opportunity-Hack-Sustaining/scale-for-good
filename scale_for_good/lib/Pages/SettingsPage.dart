@@ -5,25 +5,26 @@ import './HomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
-  //final LocalStorage storage;
-  final String title;
 
+  final String title;
 
   SettingsPage({Key key, this.title}) : super(key: key);
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
+
 }
 
 class _SettingsPageState extends State<SettingsPage> {
 
   //toggle for weight calc. First is lbs and second is kilos
   List<bool> weightList = [false,true];
+
   @override
   Widget build(BuildContext context) {
-
     Widget knownDevices = Container(
       padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:12),
+
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -40,20 +41,20 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                    )
+                  )
+                )
+              ]
+            )
           ),
           _buildButtonColumn(Colors.grey, Icons.edit, 'Edit'),
           Text('   '),
           _buildButtonColumn(Colors.red, Icons.cancel, 'Forget'),
           Text('   '),
-          _buildButtonColumn(Colors.blue, Icons.bluetooth_connected, 'Connect'),
+          _buildButtonColumn(Colors.blue, Icons.bluetooth_connected, 'Connect')
           /*3*/
-        ],
-      ),
+        ]
+      )
     );
 
     Widget discovDevices = Container(
@@ -74,28 +75,27 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                    )
+                  )
+                )
+              ]
+            )
           ),
           _buildButtonColumn(Colors.blue, Icons.add, 'Add'),
-          Text('   '),
+          Text('   ')
           /*3*/
-        ],
-      ),
+        ]
+      )
     );
 
     Widget knownDevicesTitle = Container(
-
       padding: const EdgeInsets.only(left:32,top:32),
       child: Text(
         'Known Devices',
         style: TextStyle(
-          fontSize: 24,
-        ),
-      ),
+          fontSize: 24
+        )
+      )
     );
 
     Widget discoveredDevicesTitle = Container(
@@ -103,22 +103,21 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Text(
         'Discovered Devices',
         style: TextStyle(
-          fontSize: 24,
-        ),
-      ),
+          fontSize: 24
+        )
+      )
     );
 
 
     //Begin main settings
     Widget MainSettingsTitle = Container(
-
       padding: const EdgeInsets.only(left:32),
       child: Text(
         'Main Settings',
         style: TextStyle(
-          fontSize: 24,
-        ),
-      ),
+          fontSize: 24
+        )
+      )
     );
 
     Widget weightOption = ToggleButtons(
@@ -127,7 +126,6 @@ class _SettingsPageState extends State<SettingsPage> {
         Text("Kg")
       ],
       onPressed: (int index) async {
-
         setState(() {
           for (int buttonIndex = 0; buttonIndex < weightList.length; buttonIndex++) {
             if (buttonIndex == index) {
@@ -210,7 +208,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   trailing: new Icon(Icons.settings),
                   onTap: () {
                     Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => SettingsPage(title: "Settings")));
+                    Navigator.of(context).push(new MaterialPageRoute(builder:
+                        (BuildContext context) => SettingsPage(title: "Settings")));
                   }
               ),
               new ListTile(
@@ -271,7 +270,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-
 }
 
 class weightPreferencesHelper {
@@ -296,4 +294,5 @@ class weightPreferencesHelper {
     bool checkValue = prefs.containsKey('value');
     return checkValue;
   }
+
 }
