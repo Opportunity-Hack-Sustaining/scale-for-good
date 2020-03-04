@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:scale_for_good/Pages/History/HistoryPage.dart';
 import 'package:scale_for_good/Pages/Home/HomePage.dart';
+import 'package:scale_for_good/Pages/Navigation/HamburgerMenu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -175,7 +176,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
 
     return MaterialApp(
-      title: 'Settings',
+      title: widget.title,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
@@ -192,57 +193,7 @@ class _SettingsPageState extends State<SettingsPage> {
           ],
         ),
 
-        drawer: new Drawer(
-          child: new ListView(
-            children: <Widget>[
-
-              new ListTile(
-                  title: new Text("Home"),
-                  trailing: new Icon(Icons.home),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder:
-                        (context) => HomePage(
-                          title: "Home Page",
-                        )
-                    ));
-                  }
-              ),
-
-              new ListTile(
-                  title: new Text("Settings"),
-                  trailing: new Icon(Icons.settings),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder:
-                        (BuildContext context) => SettingsPage(
-                          title: "Settings Page"
-                        )
-                    ));
-                  }
-              ),
-              new ListTile(
-                  title: new Text("History"),
-                  trailing: new Icon(Icons.history),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder:
-                        (BuildContext context) => HistoryPage(
-                          title: "History Page"
-                        )
-                    ));
-                  }
-              ),
-              new Divider(),
-              new ListTile(
-                title: new Text("Close"),
-                trailing: new Icon(Icons.cancel),
-                onTap: () => Navigator.of(context).pop(),
-              )
-
-            ],
-          ),
-        ),
+        drawer: HamburgerMenu(),
 
         body: ListView(
 

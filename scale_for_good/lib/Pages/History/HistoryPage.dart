@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:scale_for_good/Dataflow/LocalStorage.dart';
+import 'package:scale_for_good/Pages/Navigation/HamburgerMenu.dart';
 import 'package:scale_for_good/Pages/Settings/SettingsPage.dart';
 import 'package:scale_for_good/Pages/Home/HomePage.dart';
 
@@ -28,57 +29,7 @@ class _HistoryPageState extends State<HistoryPage> {
           title: Text(widget.title)
         ),
 
-        drawer: new Drawer(
-          child: new ListView(
-            children: <Widget>[
-              new ListTile(
-                title: new Text("Home"),
-                trailing: new Icon(Icons.home),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(new MaterialPageRoute(builder:
-                      (context) => HomePage(
-                        title: "Home Page",
-                        storage: widget.storage
-                      )
-                  ));
-                }
-              ),
-
-              new ListTile(
-                title: new Text("Settings"),
-                trailing: new Icon(Icons.settings),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(new MaterialPageRoute(builder:
-                      (context) => SettingsPage(title: "Settings Page")));
-                }
-              ),
-
-              new ListTile(
-                title: new Text("History"),
-                trailing: new Icon(Icons.history),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(new MaterialPageRoute(builder:
-                      (context) => HistoryPage(
-                        title: "History Page",
-                        storage: widget.storage
-                      )
-                  ));
-                }
-              ),
-
-              new Divider(),
-
-              new ListTile(
-                title: new Text("Close"),
-                trailing: new Icon(Icons.cancel),
-                onTap: () => Navigator.of(context).pop()
-              )
-            ]
-          )
-        ),
+        drawer: HamburgerMenu(),
 
         body: Container(
           color: Colors.white,
