@@ -6,6 +6,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_ble_lib/flutter_ble_lib.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../sensor_tag_config.dart';
 

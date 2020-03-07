@@ -64,17 +64,6 @@ class ManualTestView extends StatelessWidget {
   }
 
 
-  void _monitorCharacteristicForPeripheral() {
-    _deviceDetailsBloc.monitorCharacteristicForPeripheral();
-  }
-
-  void _monitorCharacteristicForService() {
-    _deviceDetailsBloc.monitorCharacteristicForService();
-  }
-
-  void _monitorCharacteristicDirectly() {
-    _deviceDetailsBloc.monitorCharacteristicDirectly();
-  }
 
   void _disableBluetooth() {
     _deviceDetailsBloc.disableBluetooth();
