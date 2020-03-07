@@ -93,7 +93,7 @@ class DeviceDetailsBloc {
     _clearLogs();
     _deviceController.stream.listen((bleDevice) async {
       PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .discovery();
+          .getConvertedWeight();
     });
   }
 

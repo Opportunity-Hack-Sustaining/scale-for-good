@@ -1,14 +1,16 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_ble_lib/flutter_ble_lib.dart';
+import 'package:flutter_ble_lib/internal/_managers_for_classes.dart';
+
 abstract class SensorTagTemperatureUuids {
-  static const String weightService =
+  static String test = "wef";
+  static Map<String, dynamic> json = new Map();
+  static ManagerForPeripheral manager;
+  static Peripheral peripheral = new Peripheral.fromJson(json, manager);
+  static String weightService =
       "27cf08c1-076a-41af-becd-02ed6f6109b9";
   static const String weightCharacteristic =
-      "FD758B93-0BFA-4C52-8AF0-85845a74a606";
-  static const String temperatureConfigCharacteristic =
-      "F000AA02-0451-4000-B000-000000000000";
-  static const String characteristicUserDescriptionDescriptor =
-      "00002901-0000-1000-8000-00805f9b34fb";
-  static const String clientCharacteristicConfigurationDescriptor =
-      "00002902-0000-1000-8000-00805f9b34fb";
+      "fd758b93-0bfa-4c52-8af0-85845a74a606";
 
 
 }

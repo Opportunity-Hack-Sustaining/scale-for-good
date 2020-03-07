@@ -115,7 +115,7 @@ class ManualTestView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 2.0),
           child: Row(
             children: <Widget>[
-              ButtonView("Discovery", action: _discovery),
+              ButtonView("Cmon baby work", action: _discovery),
             ],
           ),
         ),
