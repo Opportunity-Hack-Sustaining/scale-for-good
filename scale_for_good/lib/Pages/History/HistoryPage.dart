@@ -19,7 +19,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
 
-  DateFormat dateFormat = new DateFormat.yMMMd("en_US");
+
 
   @override
   Widget build(BuildContext context) {

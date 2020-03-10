@@ -1,11 +1,18 @@
 class Donation{
+
   DateTime date;
   double weight;
   String donatedBy;
   String description;
   String email;
 
-  Donation({this.date, this.weight, this.donatedBy, this.description, this.email});
+  Donation({
+      this.date,
+      this.weight,
+      this.donatedBy,
+      this.description,
+      this.email
+  });
 
   factory Donation.fromJson(Map<String, dynamic> json) {
     return Donation(
@@ -27,4 +34,5 @@ class Donation{
     };
     return jsonDono;
   }
+
 }
