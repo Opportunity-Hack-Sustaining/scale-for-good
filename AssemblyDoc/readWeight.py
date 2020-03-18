@@ -7,7 +7,7 @@ import statistics
 from hx711 import HX711
 
 
-referenceUnit = 1
+referenceUnit = 22
 weight = 0
 
 def cleanAndExit():
@@ -49,7 +49,7 @@ hx.set_reading_format("MSB", "MSB")
 # and I got numbers around 184000 when I added 2kg. So, according to the rule of thirds:
 # If 2000 grams is 184000 then 1000 grams is 184000 / 2000 = 92.
 #hx.set_reference_unit(113)
-#hx.set_reference_unit(referenceUnit)
+hx.set_reference_unit(referenceUnit)
 
 hx.reset()
 
@@ -63,19 +63,19 @@ valArray = []
 while readValues:
     try:
         # Prints the weight
-        val = max(0, int(hx.get_weight(1)))
-        if len(valArray) != 19:
+        val = max(0, int(hx.get_weight(2)))
+        if len(valArray) != 4:
         	valArray.append(val)
         else:
         	weight = calcWeights(valArray)
 		if weight > 200000:
 		    weight = 200000
-        	print("Sent Weight is: ",weight)
-		f = open("weightStore.txt", "w")
+#       	print("Sent Weight is: ",weight)
+		f = open("/home/pi/Documents/scaleForGood/AssemblyDoc/weightStore.txt", "w")
 		f.write(str(weight))
 		f.close
         	valArray = []
-        print("Read weight: ",val)
+#        print("Read weight: ",val)
 
         hx.power_down()
         hx.power_up()
