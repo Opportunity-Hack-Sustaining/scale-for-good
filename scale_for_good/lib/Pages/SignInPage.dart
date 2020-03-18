@@ -1,23 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:scale_for_good/Pages/HistoryPage.dart';
+import 'HistoryPage.dart';
 import './HomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'SettingsPage.dart';
 
-import 'SignInPage.dart';
-
-class SettingsPage extends StatefulWidget {
+class SignInPage extends StatefulWidget {
   //final LocalStorage storage;
   final String title;
 
 
-  SettingsPage({Key key, this.title}) : super(key: key);
+  SignInPage({Key key, this.title}) : super(key: key);
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SignInPageState extends State<SignInPage> {
 
   //toggle for weight calc. First is lbs and second is kilos
   List<bool> weightList = [false,true];
@@ -139,7 +138,6 @@ class _SettingsPageState extends State<SettingsPage> {
             }
           }
         });
-        await weightPreferencesHelper.setKiloToSF(weightList[1]);
       },
       isSelected: weightList,
 
@@ -182,17 +180,6 @@ class _SettingsPageState extends State<SettingsPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
-          actions: <Widget>[
-            FutureBuilder<bool>(
-              // get the languageCode, saved in the preferences
-                future: weightPreferencesHelper.getKiloSF(),
-                initialData: true,
-                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                  return snapshot.hasData
-                      ? weightList[1] = snapshot.data
-                      : Container();
-                }),
-          ],
         ),
 
         drawer: new Drawer(
@@ -282,28 +269,4 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
 
-}
-
-class weightPreferencesHelper {
-
-  static final String _kLanguageCode = "kilos";
-
-  //This could be repurposed to save many things
-  static Future<bool> setKiloToSF(bool sett) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.setBool(_kLanguageCode, sett);
-  }
-
-  static Future<bool> getKiloSF() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    //Return bool
-    return prefs.getBool(_kLanguageCode) ?? true;
-
-  }
-
-  checkForBool() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool checkValue = prefs.containsKey('value');
-    return checkValue;
-  }
 }

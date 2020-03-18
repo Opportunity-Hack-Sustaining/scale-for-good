@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scale_for_good/Dataflow/Donation.dart';
 import 'package:scale_for_good/Dataflow/LocalStorage.dart';
 import 'package:scale_for_good/Pages/HistoryPage.dart';
+import 'package:scale_for_good/Pages/SignInPage.dart';
 import 'dart:math';
 import './SettingsPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -101,6 +102,15 @@ class _HomePageState extends State<HomePage> {
       drawer: new Drawer(
         child: new ListView(
           children: <Widget>[
+            new ListTile(
+                title: new Text("Sign In"),
+                trailing: new Icon(Icons.home),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (context) => SignInPage(title: 'Sign In')));
+                }
+            ),
+            new Divider(),
 
             new ListTile(
                 title: new Text("Home Page"),
