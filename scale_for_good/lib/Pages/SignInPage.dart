@@ -20,40 +20,51 @@ class _SignInPageState extends State<SignInPage> {
 
   //toggle for weight calc. First is lbs and second is kilos
   List<bool> weightList = [false,true];
+  String _username;
+  String _password;
+  String _databaseName;
   @override
   Widget build(BuildContext context) {
 
-    Widget knownDevices = Container(
+    Widget userNameInput = Container(
       padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            /*1*/
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /*2*/
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    'Scale name',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          _buildButtonColumn(Colors.grey, Icons.edit, 'Edit'),
-          Text('   '),
-          _buildButtonColumn(Colors.red, Icons.cancel, 'Forget'),
-          Text('   '),
-          _buildButtonColumn(Colors.blue, Icons.bluetooth_connected, 'Connect'),
-          /*3*/
-        ],
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: "Username:",
+        ),
+        onChanged: (text){
+          setState(() {
+            _username = text;
+          });
+        },
+      ),
+    );
+
+    Widget passwordInput = Container(
+      padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:12),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: "Password:",
+        ),
+        onChanged: (text){
+          setState(() {
+            _username = text;
+          });
+        },
+      ),
+    );
+
+    Widget dbNameInput = Container(
+      padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:50),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: "Database name:",
+        ),
+        onChanged: (text){
+          setState(() {
+            _username = text;
+          });
+        },
       ),
     );
 
@@ -88,98 +99,35 @@ class _SignInPageState extends State<SignInPage> {
       ),
     );
 
-    Widget knownDevicesTitle = Container(
-
-      padding: const EdgeInsets.only(left:32,top:32),
-      child: Text(
-        'Known Devices',
-        style: TextStyle(
-          fontSize: 24,
-        ),
-      ),
-    );
-
-    Widget discoveredDevicesTitle = Container(
-      padding: const EdgeInsets.only(left:32,top:32),
-      child: Text(
-        'Discovered Devices',
-        style: TextStyle(
-          fontSize: 24,
-        ),
+    Widget confirm = SizedBox(
+      width: 100.0,
+      height: 100.0,
+      child: new RaisedButton(
+        child: new Text('SIGN IN'),
+        onPressed: _dbConnect,
       ),
     );
 
 
     //Begin main settings
-    Widget MainSettingsTitle = Container(
+    Widget signInTitle = Container(
 
       padding: const EdgeInsets.only(left:32),
       child: Text(
-        'Main Settings',
+        'Sign In Credentials',
         style: TextStyle(
           fontSize: 24,
         ),
       ),
     );
 
-    Widget weightOption = ToggleButtons(
-      children: <Widget>[
-        Text("Lb"),
-        Text("Kg")
-      ],
-      onPressed: (int index) async {
 
-        setState(() {
-          for (int buttonIndex = 0; buttonIndex < weightList.length; buttonIndex++) {
-            if (buttonIndex == index) {
-              weightList[buttonIndex] = true;
-            } else {
-              weightList[buttonIndex] = false;
-            }
-          }
-        });
-      },
-      isSelected: weightList,
-
-    );
-
-
-    Widget calcWeight = Container(
-      padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            /*1*/
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /*2*/
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    'Calculate Weight:',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          weightOption,
-          Text('   '),
-          /*3*/
-        ],
-      ),
-    );
 
     return MaterialApp(
-      title: 'Settings',
+      title: 'Sign In',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Settings'),
+          title: Text('Sign In'),
         ),
 
         drawer: new Drawer(
@@ -233,18 +181,18 @@ class _SignInPageState extends State<SignInPage> {
 
           padding: const EdgeInsets.only(top:30),
           children: [
-            MainSettingsTitle,
-            calcWeight,
-            knownDevicesTitle,
-            knownDevices,
-            knownDevices,
-            discoveredDevicesTitle,
-            discovDevices,
-            discovDevices
+            signInTitle,
+            userNameInput,
+            passwordInput,
+            dbNameInput,
+            confirm
           ],
         ),
       ),
     );
+  }
+  void _dbConnect() {
+    //Implement connection here
   }
 
   Column _buildButtonColumn(Color color, IconData icon, String label) {
@@ -267,6 +215,8 @@ class _SignInPageState extends State<SignInPage> {
       ],
     );
   }
+
+
 
 
 }
