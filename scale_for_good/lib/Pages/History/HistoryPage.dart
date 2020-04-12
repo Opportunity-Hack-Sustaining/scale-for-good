@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:scale_for_good/Dataflow/Donation.dart';
 import 'package:scale_for_good/Dataflow/LocalStorage.dart';
+import 'package:scale_for_good/Pages/History/EntryRow.dart';
 import 'package:scale_for_good/Pages/Navigation/HamburgerMenu.dart';
 import 'package:scale_for_good/Pages/Settings/SettingsPage.dart';
 import 'package:scale_for_good/Pages/Home/HomePage.dart';
@@ -19,10 +21,12 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
 
-
+  List<Donation> donations;
 
   @override
   Widget build(BuildContext context) {
+    donations = widget.storage.getDonationsList();
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -37,30 +41,11 @@ class _HistoryPageState extends State<HistoryPage> {
 
           child: Column(
             children: <Widget>[
-              DataTable(
-                columns: [
-                  DataColumn(label: Text("Weight")),
-                  DataColumn(label: Text("Date")),
-                  DataColumn(label: Text("Donator")),
-                  DataColumn(label: Text("Description"))
-                ],
-
-                rows: widget.storage.getDonationsList().map(
-                    (dono) => DataRow(
-                      cells: <DataCell>[
-                        DataCell(Container(
-                          width: 50,
-                          child: Text(dono.weight.toString())
-                        )),
-                        DataCell(Container(
-                          width: 50,
-                          child: Text(dateFormat.format(dono.date))
-                        )),
-                        DataCell(Text(dono.donatedBy)),
-                        DataCell(Text(dono.description))
-                      ]
-                    )
-                ).toList()
+              ListView.builder(
+                itemCount: donations.length,
+                itemBuilder: (BuildContext context, int index){
+                  return EntryRow(donations[index], index);
+                }
               ),
 
               ButtonBar(
