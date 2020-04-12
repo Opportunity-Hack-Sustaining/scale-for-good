@@ -10,6 +10,10 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
 
+  void _convertToCSV() {
+    //TODO: Add conversion functionality
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -67,7 +71,13 @@ class _HistoryPageState extends State<HistoryPage> {
                   color: Colors.lightBlue,
                   textColor: Colors.white,
                   child: Text("Clear"),
-                )
+                ),
+                FlatButton(
+                  color: Colors.lightBlue,
+                  textColor: Colors.white,
+                  onPressed: _convertToCSV,
+                  child: Text("Export to CSV"),
+                ),
               ],
             ),
           ],
