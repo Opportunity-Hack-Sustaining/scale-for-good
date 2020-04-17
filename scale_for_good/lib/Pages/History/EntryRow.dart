@@ -40,7 +40,7 @@ class EntryRow extends StatelessWidget {
         Expanded(
           child: Container(
             child: Text(
-              weight.toString(),
+              weight.toStringAsFixed(2),
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis
             ),

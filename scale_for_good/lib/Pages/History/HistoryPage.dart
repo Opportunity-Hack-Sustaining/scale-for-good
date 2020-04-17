@@ -39,27 +39,12 @@ class _HistoryPageState extends State<HistoryPage> {
           color: Colors.white,
           padding: EdgeInsets.all(10.0),
 
-          child: Column(
-            children: <Widget>[
-              ListView.builder(
-                itemCount: donations.length,
-                itemBuilder: (BuildContext context, int index){
-                  return EntryRow(donations[index], index);
-                }
-              ),
-
-              ButtonBar(
-                alignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  FlatButton(
-                    color: Colors.lightBlue,
-                    textColor: Colors.white,
-                    child: Text("Clear")
-                  )
-                ]
-              )
-            ]
-          )
+          child: ListView.builder(
+            itemCount: donations.length,
+            itemBuilder: (BuildContext context, int index){
+            return EntryRow(donations[index], index);
+            }
+          ),
         )
       )
     );
