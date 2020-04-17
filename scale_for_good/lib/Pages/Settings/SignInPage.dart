@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'HistoryPage.dart';
-import './HomePage.dart';
+import 'package:scale_for_good/Pages/History/HistoryPage.dart';
+import 'package:scale_for_good/Pages/Home/HomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'SettingsPage.dart';
 

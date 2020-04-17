@@ -1,29 +1,30 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:scale_for_good/Pages/ConnectionsPage.dart';
-import 'package:scale_for_good/Pages/HistoryPage.dart';
+import 'package:scale_for_good/Pages/History/HistoryPage.dart';
+import 'package:scale_for_good/Pages/Home/HomePage.dart';
+import 'package:scale_for_good/Pages/Navigation/HamburgerMenu.dart';
 import 'package:scale_for_good/devices_list/devices_bloc_provider.dart';
 import 'package:scale_for_good/devices_list/devices_list_view.dart';
-import './HomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'ConnectionsPage.dart';
 import 'SignInPage.dart';
 
 class SettingsPage extends StatefulWidget {
-  //final LocalStorage storage;
-  final String title;
 
+  final String title;
 
   SettingsPage({Key key, this.title}) : super(key: key);
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
+
 }
 
 class _SettingsPageState extends State<SettingsPage> {
 
   //toggle for weight calc. First is lbs and second is kilos
   List<bool> weightList = [false,true];
+
   @override
   Widget build(BuildContext context) {
 
@@ -40,6 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
     Widget knownDevices = Container(
       padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:12),
+
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -56,20 +58,20 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                    )
+                  )
+                )
+              ]
+            )
           ),
           _buildButtonColumn(Colors.grey, Icons.edit, 'Edit'),
           Text('   '),
           _buildButtonColumn(Colors.red, Icons.cancel, 'Forget'),
           Text('   '),
-          _buildButtonColumn(Colors.blue, Icons.bluetooth_connected, 'Connect'),
+          _buildButtonColumn(Colors.blue, Icons.bluetooth_connected, 'Connect')
           /*3*/
-        ],
-      ),
+        ]
+      )
     );
 
     Widget discovDevices = Container(
@@ -90,28 +92,27 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                    )
+                  )
+                )
+              ]
+            )
           ),
           _buildButtonColumn(Colors.blue, Icons.add, 'Add'),
-          Text('   '),
+          Text('   ')
           /*3*/
-        ],
-      ),
+        ]
+      )
     );
 
     Widget knownDevicesTitle = Container(
-
       padding: const EdgeInsets.only(left:32,top:32),
       child: Text(
         'Known Devices',
         style: TextStyle(
-          fontSize: 24,
-        ),
-      ),
+          fontSize: 24
+        )
+      )
     );
 
     Widget discoveredDevicesTitle = Container(
@@ -119,22 +120,21 @@ class _SettingsPageState extends State<SettingsPage> {
       child: Text(
         'Discovered Devices',
         style: TextStyle(
-          fontSize: 24,
-        ),
-      ),
+          fontSize: 24
+        )
+      )
     );
 
 
     //Begin main settings
-    Widget MainSettingsTitle = Container(
-
+    Widget mainSettingsTitle = Container(
       padding: const EdgeInsets.only(left:32),
       child: Text(
         'Main Settings',
         style: TextStyle(
-          fontSize: 24,
-        ),
-      ),
+          fontSize: 24
+        )
+      )
     );
 
     Widget weightOption = ToggleButtons(
@@ -143,7 +143,6 @@ class _SettingsPageState extends State<SettingsPage> {
         Text("Kg")
       ],
       onPressed: (int index) async {
-
         setState(() {
           for (int buttonIndex = 0; buttonIndex < weightList.length; buttonIndex++) {
             if (buttonIndex == index) {
@@ -152,6 +151,7 @@ class _SettingsPageState extends State<SettingsPage> {
               weightList[buttonIndex] = false;
             }
           }
+
         });
         await WeightPreferencesHelper.setKiloToSF(weightList[1]);
       },
@@ -192,75 +192,30 @@ class _SettingsPageState extends State<SettingsPage> {
     );
 
     return MaterialApp(
-      title: 'Settings',
+      title: widget.title,
       home: Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
-
+          actions: <Widget>[
+            FutureBuilder<bool>(
+              // get the languageCode, saved in the preferences
+                future: WeightPreferencesHelper.getKiloSF(),
+                initialData: true,
+                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                  return snapshot.hasData
+                      ? weightList[1] = snapshot.data
+                      : Container();
+                }),
+          ],
         ),
 
-        drawer: new Drawer(
-          child: new ListView(
-            children: <Widget>[
-              new ListTile(
-                  title: new Text("Sign In"),
-                  trailing: new Icon(Icons.home),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => SignInPage(title: 'Sign In')));
-                  }
-              ),
-              new Divider(),
-              new ListTile(
-                  title: new Text("Home Page"),
-                  trailing: new Icon(Icons.home),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (context) => HomePage(title: 'Home Page')));
-                  }
-              ),
-              new ListTile(
-                  title: new Text("Settings Page"),
-                  trailing: new Icon(Icons.settings),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => SettingsPage(title: "Settings")));
-                  }
-              ),
-              new ListTile(
-                  title: new Text("Connections Page"),
-                  trailing: new Icon(Icons.settings),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(
-                        new MaterialPageRoute(
-                            builder: (BuildContext context) => ConnectionsPage()));
-                  }
-              ),
-              new ListTile(
-                  title: new Text("History"),
-                  trailing: new Icon(Icons.history),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => HistoryPage(title: "History")));
-                  }
-              ),
-              new Divider(),
-              new ListTile(
-                title: new Text("Close"),
-                trailing: new Icon(Icons.cancel),
-                onTap: () => Navigator.of(context).pop(),
-              )
-
-            ],
-          ),
-        ),
+        drawer: HamburgerMenu(),
 
         body: ListView(
 
           padding: const EdgeInsets.only(top:30),
           children: [
-            MainSettingsTitle,
+            mainSettingsTitle,
             calcWeight,
             knownDevicesTitle,
             knownDevices,
@@ -295,7 +250,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-
 }
 
 class WeightPreferencesHelper {
@@ -320,4 +274,5 @@ class WeightPreferencesHelper {
     bool checkValue = prefs.containsKey('kilos');
     return checkValue;
   }
+
 }

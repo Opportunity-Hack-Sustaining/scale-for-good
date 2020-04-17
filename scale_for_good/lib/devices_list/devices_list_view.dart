@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
-import 'package:scale_for_good/Pages/ConnectionsPage.dart';
-import 'package:scale_for_good/Pages/HistoryPage.dart';
-import 'package:scale_for_good/Pages/HomePage.dart';
+import 'package:scale_for_good/Pages/Settings/ConnectionsPage.dart';
+import 'package:scale_for_good/Pages/History/HistoryPage.dart';
+import 'package:scale_for_good/Pages/Home/HomePage.dart';
 
 import 'package:scale_for_good/model/ble_device.dart';
 
