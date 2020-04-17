@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:scale_for_good/Pages/History/HistoryPage.dart';
 import 'package:scale_for_good/Pages/Home/HomePage.dart';
 import 'package:scale_for_good/Pages/Navigation/HamburgerMenu.dart';
+import 'package:scale_for_good/devices_list/devices_bloc_provider.dart';
+import 'package:scale_for_good/devices_list/devices_list_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'ConnectionsPage.dart';
+import 'SignInPage.dart';
 
 class SettingsPage extends StatefulWidget {
 
@@ -23,6 +27,18 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future<bool> temp = WeightPreferencesHelper.checkForBool();
+    if(temp == true) {
+      if(WeightPreferencesHelper.getKiloSF() as bool) {
+
+      }
+      else {
+        weightList[0] = true;
+        weightList[1] = false;
+      }
+    }
+
     Widget knownDevices = Container(
       padding: const EdgeInsets.only(left:32, right:32, top:12, bottom:12),
 
@@ -253,9 +269,9 @@ class WeightPreferencesHelper {
 
   }
 
-  checkForBool() async {
+  static Future<bool> checkForBool() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool checkValue = prefs.containsKey('value');
+    bool checkValue = prefs.containsKey('kilos');
     return checkValue;
   }
 

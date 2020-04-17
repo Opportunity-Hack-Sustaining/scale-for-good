@@ -34,6 +34,6 @@ CustomCharacteristic.prototype.onWriteRequest = function(data, offset, withoutRe
 
 //Call python to get weight
 getWeight = function(){
-	weight = fs.readFileSync('../weightStore.txt', 'utf8');
+	weight = fs.readFileSync('/home/pi/Documents/scaleForGood/AssemblyDoc/weightStore.txt', 'utf8');
 	console.log(weight);
 };
