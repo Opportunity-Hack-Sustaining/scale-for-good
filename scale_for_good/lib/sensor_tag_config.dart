@@ -12,5 +12,8 @@ abstract class SensorTagTemperatureUuids {
   static const String weightCharacteristic =
       "fd758b93-0bfa-4c52-8af0-85845a74a606";
 
+  static void setPeripheral(Peripheral perf) {
+      peripheral = perf;
+  }
 
 }
