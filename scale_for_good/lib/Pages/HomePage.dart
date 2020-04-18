@@ -281,15 +281,33 @@ class _HomePageState extends State<HomePage> {
     print("C: $c");
     print("B: $b");
     print("A: $a");
-    int total = a + (b*256) + (c*65536) + d;
+    double total = (a + (b*256) + (c*65536) + d)/1000.0;
     print("TOTAL CONVERTED VALUE: $total");
     print("Weight: \n$readValue");
+      setState(() {
+        _weight = total;
+        _calculatedWeight = _weight;
+        _isKilos(isSelected[1]);
+        _dateTime = DateTime.now();
+        _sentStatus = "Weight sent!";
+        _donatorName = "";
+        _donationDesc = "";
+        _donatorEmail = "";
+      });
+      disconnectManual();
 
     //turn on when characteristic value is unknown
     /*characteristicFromPeripheral.forEach((characteristic) =>
         log("Found characteristic \n ${characteristic.uuid}")
     );*/
 
+  }
+  Future<void> disconnectManual() async {
+    if (await peripheral.isConnected()) {
+      print("DISCONNECTING...");
+      await peripheral.disconnectOrCancelConnection();
+    }
+    print("Disconnected!");
   }
 
 

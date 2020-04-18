@@ -7,6 +7,8 @@ import 'package:scale_for_good/repository/device_repository.dart';
 import 'package:scale_for_good/test_scenarios/test_scenarios.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../sensor_tag_config.dart';
+
 class DeviceDetailsBloc {
   final BleManager _bleManager;
   final DeviceRepository _deviceRepository;
@@ -181,6 +183,7 @@ class DeviceDetailsBloc {
         log("Connecting to ${peripheral.name}");
         await peripheral.connect();
         log("Connected!");
+        SensorTagTemperatureUuids.setPeripheral(peripheral);
       } on BleError catch (e) {
         logError(e.toString());
       }
