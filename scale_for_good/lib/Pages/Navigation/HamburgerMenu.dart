@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:scale_for_good/Dataflow/LocalStorage.dart';
 import 'package:scale_for_good/Pages/History/HistoryPage.dart';
 import 'package:scale_for_good/Pages/Home/HomePage.dart';
+import 'package:scale_for_good/Pages/Settings/ConnectionsPage.dart';
 import 'package:scale_for_good/Pages/Settings/SettingsPage.dart';
 
 class HamburgerMenu extends StatelessWidget {
@@ -26,14 +27,12 @@ class HamburgerMenu extends StatelessWidget {
           ),
 
           new ListTile(
-              title: new Text("Settings"),
+              title: new Text("Connections"),
               trailing: new Icon(Icons.settings),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (context) => SettingsPage(
-                      title: "Settings Page"
-                    )
+                    builder: (context) => ConnectionsPage()
                 ));
               }
           ),
