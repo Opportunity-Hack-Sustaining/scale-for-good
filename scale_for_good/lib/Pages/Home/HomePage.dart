@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
   String _donatorName;
   String _donationDesc;
   String _donatorEmail;
+  double _zeroWeight = 0;
 
   @override
   void initState() {
@@ -67,13 +68,6 @@ class _HomePageState extends State<HomePage> {
       _donationDesc = "";
       _donatorEmail = "";
       */
-    });
-  }   
-
-  void _zeroWeight() {
-    setState(() {
-        _weight = 0;
-        _calculatedWeight = 0;
     });
   }
 
@@ -202,7 +196,7 @@ class _HomePageState extends State<HomePage> {
         FlatButton(
           color: Colors.lightBlue,
           textColor: Colors.white,
-          onPressed: _zeroWeight,
+          onPressed: zeroTheWeight,
           child: Text("Zero"),
         )
       ]
@@ -260,7 +254,7 @@ class _HomePageState extends State<HomePage> {
     print("TOTAL CONVERTED VALUE: $total");
     print("Weight: \n$readValue");
     setState(() {
-      _weight = total;
+      _weight = total - _zeroWeight;
       _calculatedWeight = _weight;
       _isKilos(isSelected[1]);
       _dateTime = DateTime.now();
@@ -271,12 +265,84 @@ class _HomePageState extends State<HomePage> {
     });
     disconnectManual();
 
+    widget.storage.writeDonation(new Donation(
+        date: _dateTime,
+        weight: _weight,
+        donatedBy: _donatorName,
+        description: _donationDesc,
+        email: _donatorEmail
+    ));
     //turn on when characteristic value is unknown
     /*characteristicFromPeripheral.forEach((characteristic) =>
         log("Found characteristic \n ${characteristic.uuid}")
     );*/
 
   }
+
+
+  Future<void> zeroTheWeight() async {
+
+    peripheral = SensorTagTemperatureUuids.peripheral;
+    print("Connecting to ${peripheral.name}");
+    await peripheral.connect();
+    //SensorTagTemperatureUuids.peripheral = peripheral;
+    print("Connected!");
+
+    await peripheral.discoverAllServicesAndCharacteristics();
+    Service savedService;
+    Characteristic savedCharacteristic;
+    List<Service> services = await peripheral.services();
+    print("PRINTING SERVICES for \n${peripheral.name}");
+    services.forEach((service) =>
+    (service.uuid.contains(SensorTagTemperatureUuids.weightService))?
+    savedService = service: print("Found WRONG service \n${service.uuid}"));
+
+    print("PRINTING CHARACTERISTICS FOR SERVICE \n${savedService.uuid}");
+
+
+    //Use this if the characteristic value is known
+    List<Characteristic> characteristics = await savedService.characteristics();
+    characteristics.forEach((characteristic) =>
+    (characteristic.uuid.contains(SensorTagTemperatureUuids.weightCharacteristic))?
+    savedCharacteristic = characteristic: print("Found WRONG characteristic \n${characteristic.uuid}"));
+
+    print("HELLO THIS IS THE CHARACTERISTIC I WANT \n${savedCharacteristic.uuid}");
+    Uint8List readValue1 = (await savedCharacteristic.read());
+    print("AND THIS IS SUPPOSED TO BE THE VALUE \n$readValue1");
+
+    //Use this if the characteristic value is unknown
+    /*log("PRINTING CHARACTERISTICS FROM \nPERIPHERAL for the same service");
+    List<Characteristic> characteristicFromPeripheral =
+    await peripheral.characteristics(savedService.uuid);*/
+
+    //Switch savedCharacteristic to characteristicFromPeripheral[0]
+    Uint8List readValue = (await savedCharacteristic.read());
+    int d = readValue[0];
+    int c = readValue[1];
+    int b = readValue[2];
+    int a = readValue[3];
+    print("TESTING WEIGHT CONVERSION");
+    print("D: $d");
+    print("C: $c");
+    print("B: $b");
+    print("A: $a");
+    double total = (a + (b*256) + (c*65536) + d)/1000.0;
+    print("TOTAL CONVERTED VALUE: $total");
+    print("Weight: \n$readValue");
+    setState(() {
+      _zeroWeight = total;
+      _sentStatus = "Zeroed out!";
+    });
+    disconnectManual();
+
+    //turn on when characteristic value is unknown
+    /*characteristicFromPeripheral.forEach((characteristic) =>
+        log("Found characteristic \n ${characteristic.uuid}")
+    );*/
+
+  }
+
+
   Future<void> disconnectManual() async {
     if (await peripheral.isConnected()) {
       print("DISCONNECTING...");
