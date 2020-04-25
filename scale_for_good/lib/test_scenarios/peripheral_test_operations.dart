@@ -165,63 +165,6 @@ class PeripheralTestOperations {
         printDescriptors();
       });
 
-  Future<void> testReadingRssi() async {
-    await _runWithErrorHandling(() async {
-      int rssi = await peripheral.rssi();
-      log("rssi $rssi");
-    });
-  }
-
-  Future<void> testRequestingMtu() async {
-    await _runWithErrorHandling(() async {
-      int requestedMtu = 79;
-      log("Requesting MTU = $requestedMtu");
-      int negotiatedMtu = await peripheral.requestMtu(requestedMtu);
-      log("negotiated MTU $negotiatedMtu");
-    });
-  }
-
-  Future<void> readCharacteristicForPeripheral() async {
-    //await _runWithErrorHandling(() async {
-      log("Reading weight");
-      CharacteristicWithValue readValue = await peripheral.readCharacteristic(
-          SensorTagTemperatureUuids.weightService,
-          SensorTagTemperatureUuids.weightCharacteristic);
-      log("Weight: \n${readValue.value}C");
-    //});
-  }
-
-  Future<void> readCharacteristicForService() async {
-    //await _runWithErrorHandling(() async {
-      log("Reading weight");
-      Service service = await peripheral.services().then((services) =>
-          services.firstWhere((service) =>
-              service.uuid ==
-              SensorTagTemperatureUuids.weightService.toLowerCase()));
-      CharacteristicWithValue readValue = await service.readCharacteristic(
-          SensorTagTemperatureUuids.weightCharacteristic);
-      log("Weight: \n${(readValue.value)}");
-    //);
-  }
-
-  Future<void> readCharacteristic() async {
-      log("Reading weight");
-      Service service = await peripheral.services().then((services) =>
-          services.firstWhere((service) =>
-              service.uuid ==
-              SensorTagTemperatureUuids.weightService.toLowerCase()));
-
-      List<Characteristic> characteristics = await service.characteristics();
-      Characteristic characteristic = characteristics.firstWhere(
-          (characteristic) =>
-              characteristic.uuid ==
-              SensorTagTemperatureUuids.weightCharacteristic
-                  .toLowerCase());
-
-      Uint8List readValue = await characteristic.read();
-      log("Weight: \n${(readValue)}");
-  }
-
 
   Future<void> disconnect() async {
     await _runWithErrorHandling(() async {
@@ -233,54 +176,6 @@ class PeripheralTestOperations {
     });
   }
 
-  Future<void> fetchConnectedDevice() async {
-    await _runWithErrorHandling(() async {
-      log("Fetch connected devices with no service specified");
-      List<Peripheral> peripherals = await bleManager.connectedPeripherals([]);
-      peripherals.forEach((peripheral) => log("\t${peripheral.toString()}"));
-      log("Device fetched");
-      log("Fetch connected devices with temperature service");
-      peripherals = await bleManager
-          .connectedPeripherals([SensorTagTemperatureUuids.weightService]);
-      peripherals.forEach((peripheral) => log("\t${peripheral.toString()}"));
-      log("Device fetched");
-    });
-  }
-
-  Future<void> fetchKnownDevice() async {
-    await _runWithErrorHandling(() async {
-      log("Fetch known devices with no IDs specified");
-      List<Peripheral> peripherals = await bleManager.knownPeripherals([]);
-      peripherals.forEach((peripheral) => log("\t${peripheral.toString()}"));
-      log("Device fetched");
-      log("Fetch known devices with one known device's ID specified");
-      peripherals = await bleManager.knownPeripherals([peripheral.identifier]);
-      peripherals.forEach((peripheral) => log("\t${peripheral.toString()}"));
-      log("Device fetched");
-    });
-  }
-
-
-  Future<void> disableBluetooth() async {
-    await _runWithErrorHandling(() async {
-      log("Disabling radio");
-      await bleManager.disableRadio();
-    });
-  }
-
-  Future<void> enableBluetooth() async {
-    await _runWithErrorHandling(() async {
-      log("Enabling radio");
-      await bleManager.enableRadio();
-    });
-  }
-
-  Future<void> fetchBluetoothState() async {
-    await _runWithErrorHandling(() async {
-      BluetoothState bluetoothState = await bleManager.bluetoothState();
-      log("Radio state: $bluetoothState");
-    });
-  }
 
   Future<void> _runWithErrorHandling(TestedFunction testedFunction) async {
     try {

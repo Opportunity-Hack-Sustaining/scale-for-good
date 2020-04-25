@@ -14,11 +14,7 @@ class SensorTagTestScenario {
     _peripheralTestOperations.connect()
         .then((_) => _peripheralTestOperations.cancelTransaction())
         .then((_) => _peripheralTestOperations.getConvertedWeight())
-        .then((_) => _peripheralTestOperations.testRequestingMtu())
-        .then((_) => _peripheralTestOperations.testReadingRssi())
         .then((_) => Future.delayed(Duration(milliseconds: 100)))
-        .then((_) => _peripheralTestOperations.fetchConnectedDevice())
-        .then((_) => _peripheralTestOperations.fetchKnownDevice())
         .then((_) => _peripheralTestOperations.disconnect())
         .catchError((error) => _peripheralTestOperations.logError(error));
   }

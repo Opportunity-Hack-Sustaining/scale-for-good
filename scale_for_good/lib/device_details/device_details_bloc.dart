@@ -83,86 +83,12 @@ class DeviceDetailsBloc {
     log("Disconnected!");
   }
 
-  void readRssi() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .testReadingRssi();
-    });
-  }
 
   void discovery() {
     _clearLogs();
     _deviceController.stream.listen((bleDevice) async {
       PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
           .getConvertedWeight();
-    });
-  }
-
-  void fetchConnectedDevices() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .fetchConnectedDevice();
-    });
-  }
-
-  void fetchKnownDevices() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .fetchKnownDevice();
-    });
-  }
-
-  void readCharacteristicForPeripheral() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .readCharacteristicForPeripheral();
-    });
-  }
-
-  void readCharacteristicForService() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .readCharacteristicForService();
-    });
-  }
-
-  void readCharacteristicDirectly() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .readCharacteristic();
-    });
-  }
-
-
-
-
-  void disableBluetooth() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .disableBluetooth();
-    });
-  }
-
-  void enableBluetooth() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .enableBluetooth();
-    });
-  }
-
-  void fetchBluetoothState() {
-    _clearLogs();
-    _deviceController.stream.listen((bleDevice) async {
-      PeripheralTestOperations(_bleManager, bleDevice.peripheral, log, logError)
-          .fetchBluetoothState();
     });
   }
 
